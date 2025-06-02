@@ -1,0 +1,27 @@
+{
+  "name": "telephone_directory",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build --framework-inference=false --env-mode=loose",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev --framework-inference=false --env-mode=loose",
+    "format": "prettier --write \"**/*.{ts,tsx,json,js,md}\"",
+    "lint": "turbo run lint",
+    "client-dev": "turbo run client#dev",
+    "server-dev": "turbo run server#dev",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.4",
+    "typescript": "5.8.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
