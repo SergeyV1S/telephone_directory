@@ -48,8 +48,8 @@
     "zod": "3.22.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@repo/types": "*",
     "@siberiacancode/eslint": "^2.7.0",
     "@siberiacancode/prettier": "^1.2.0",
     "@types/bcrypt": "5.0.2",
