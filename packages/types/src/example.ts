@@ -1,3 +1,3 @@
 export interface INikitaBurgerKing {
-    isHungry: boolean;
+  isHungry: boolean;
 }

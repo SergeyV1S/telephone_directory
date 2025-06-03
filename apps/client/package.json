@@ -14,6 +14,7 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@repo/prettier-config": "*",
     "@repo/typescript-config": "*",
     "@repo/types": "*",
     "@eslint/js": "^9.25.0",

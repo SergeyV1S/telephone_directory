@@ -1,11 +1,10 @@
-import { resolve } from 'node:path';
-import { createTransport } from 'nodemailer';
-import hbs from 'nodemailer-express-handlebars';
+import config from "@/config";
+import { resolve } from "node:path";
+import { createTransport } from "nodemailer";
+import hbs from "nodemailer-express-handlebars";
 
-import config from '@/config';
-
-import type { MailDto } from './dto/mail.dto';
-import type { SendOptions } from './types/send-mail.type';
+import type { MailDto } from "./dto/mail.dto";
+import type { SendOptions } from "./types/send-mail.type";
 
 export const sendMail = async (options: SendOptions, data: MailDto, path: string) => {
   try {
@@ -20,14 +19,14 @@ export const sendMail = async (options: SendOptions, data: MailDto, path: string
 
     const handlebarOptions = {
       viewEngine: {
-        extName: '.hbs',
-        partialsDir: resolve(__dirname, 'templates'),
+        extName: ".hbs",
+        partialsDir: resolve(__dirname, "templates"),
         defaultLayout: false
       },
-      viewPath: resolve(__dirname, 'templates'),
-      extName: '.hbs'
+      viewPath: resolve(__dirname, "templates"),
+      extName: ".hbs"
     };
-    transporter.use('compile', hbs(handlebarOptions));
+    transporter.use("compile", hbs(handlebarOptions));
 
     const mailOptions = {
       from: config.mail.from,

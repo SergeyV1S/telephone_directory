@@ -1,2 +1,0 @@
-yarn build
-yarn lint-staged --no-stash

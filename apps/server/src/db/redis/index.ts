@@ -1,7 +1,6 @@
-import * as Redis from 'redis';
-
-import config from '@/config';
-import { logger } from '@/lib/loger';
+import * as Redis from "redis";
+import config from "@/config";
+import { logger } from "@/lib/loger";
 
 const redisClient: Redis.RedisClientType = Redis.createClient({
   password: config.database.redis.password,
@@ -11,6 +10,6 @@ const redisClient: Redis.RedisClientType = Redis.createClient({
   }
 });
 
-redisClient.on('error', (err) => logger.error(`Redis Client Error: ${err}`));
+redisClient.on("error", (err) => logger.error(`Redis Client Error: ${err}`));
 
 export default redisClient;
