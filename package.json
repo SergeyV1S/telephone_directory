@@ -9,10 +9,12 @@
     "lint": "turbo run lint",
     "client-dev": "turbo run client#dev",
     "server-dev": "turbo run server#dev",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "prepare": "husky"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
+    "husky": "^9.1.7",
     "turbo": "^2.5.4",
     "typescript": "5.8.2"
   },
