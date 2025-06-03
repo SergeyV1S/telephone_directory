@@ -166,20 +166,6 @@
       "properties": {
         "role": {
           "type": "string"
-        },
-        "image": {
-          "type": "object",
-          "properties": {
-            "uid": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "fileUrl": {
-              "type": "string"
-            }
-          }
         }
       }
     },
