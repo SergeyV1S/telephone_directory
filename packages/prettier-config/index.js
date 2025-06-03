@@ -8,7 +8,12 @@ module.exports = {
   useTabs: false,
   endOfLine: "lf",
   arrowParens: "always",
-  importOrder: ["^@app/(.*)$", "^@components/(.*)$", "^@shared/(.*)$", "^[./]"],
+  importOrder: [
+    "^(react|react-dom|@hookform|axios|zod|@tanstack/*|react-number-format|zod|react-hook-form|express)$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "^[./]",
+  ],
   importOrderSeparation: true,
   importOrderGroupNamespaceSpecifiers: true,
   importOrderSortSpecifiers: true,

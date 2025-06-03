@@ -1,9 +1,10 @@
+import { compare } from "bcrypt";
+
 import config from "@/config";
 import { ipRateLimiter } from "@/lib/ip-rate-limiter";
 import { CustomError } from "@/utils/custom_error";
 import { ErrorMessage } from "@/utils/enums/errors";
 import { HttpStatus } from "@/utils/enums/http-status";
-import { compare } from "bcrypt";
 
 import * as userService from "../user/user.service";
 import * as jwtService from "./jwt.service";
