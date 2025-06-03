@@ -1,1 +1,1 @@
-export type {INikitaBurgerKing} from './example'
+export type { INikitaBurgerKing } from "./example";

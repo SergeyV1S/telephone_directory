@@ -14,7 +14,9 @@
     "build": "tsc"
   },
   "license": "MIT",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "typescript": "5.5.4"
   }

@@ -1,11 +1,10 @@
-import * as jwt from 'jsonwebtoken';
-import { v4 } from 'uuid';
+import * as jwt from "jsonwebtoken";
+import config from "@/config";
+import redisClient from "@/db/redis";
+import { v4 } from "uuid";
 
-import config from '@/config';
-import redisClient from '@/db/redis';
-
-import type { TokenDto } from './dto/create-token.dto';
-import type { OAuthEnum } from './enums/oauth.enum';
+import type { TokenDto } from "./dto/create-token.dto";
+import type { OAuthEnum } from "./enums/oauth.enum";
 
 interface IStoreToken {
   expiration: number;
@@ -31,7 +30,7 @@ export const getCustomValue = async (keyName: string) => {
 const storeToken = async (data: IStoreToken) => {
   const key = `${data.userUid}:${data.token}`;
   const expiration = data.expiration * 60 * 60;
-  await redisClient.SET(key, 'true', { EX: expiration });
+  await redisClient.SET(key, "true", { EX: expiration });
 };
 
 export const createTokenAsync = async (tokenDto: TokenDto) => {
@@ -39,7 +38,7 @@ export const createTokenAsync = async (tokenDto: TokenDto) => {
   const res = {
     token: jwt.sign(tokenDto, config.jwt.access.secret, {
       expiresIn: config.jwt.access.expiresIn,
-      subject: 'access'
+      subject: "access"
     }),
     refresh
   };
@@ -47,7 +46,7 @@ export const createTokenAsync = async (tokenDto: TokenDto) => {
   await storeToken({
     token: refresh,
     userUid: tokenDto.uid,
-    expiration: +config.jwt.refresh.expiresIn.replace('h', '')
+    expiration: +config.jwt.refresh.expiresIn.replace("h", "")
   });
   return res;
 };

@@ -1,29 +1,28 @@
-import jwt from 'jsonwebtoken';
+import config from "@/config";
+import jwt from "jsonwebtoken";
 
-import config from '@/config';
-
-import type { TDecodedToken } from '../types/decodedToken.interface';
+import type { TDecodedToken } from "../types/decodedToken.interface";
 
 interface TGenerateOptions {
   payload: object | string | Buffer;
-  tokenType: 'access' | 'passwordReset' | 'refresh';
+  tokenType: "access" | "passwordReset" | "refresh";
 }
 
 interface TVerifyOptions {
   token: string;
-  tokenType: TGenerateOptions['tokenType'];
+  tokenType: TGenerateOptions["tokenType"];
 }
 
-function selectFunc(tokenType: TGenerateOptions['tokenType']) {
-  if (tokenType === 'refresh') {
+function selectFunc(tokenType: TGenerateOptions["tokenType"]) {
+  if (tokenType === "refresh") {
     return {
       secret: config.jwt.refresh.secret,
-      expiresIn: config.jwt.refresh.expiresIn || '30d'
+      expiresIn: config.jwt.refresh.expiresIn || "30d"
     };
   }
   return {
     secret: config.jwt.access.secret,
-    expiresIn: config.jwt.access.expiresIn || '5m'
+    expiresIn: config.jwt.access.expiresIn || "5m"
   };
 }
 
@@ -32,7 +31,7 @@ function generate({ payload, tokenType }: TGenerateOptions): string {
 
   return jwt.sign(payload, secret, {
     expiresIn,
-    algorithm: 'HS256',
+    algorithm: "HS256",
     subject: tokenType
   });
 }
@@ -42,11 +41,11 @@ function verify({ token, tokenType }: TVerifyOptions) {
 
   try {
     return jwt.verify(token, secret, {
-      algorithms: ['HS256'],
+      algorithms: ["HS256"],
       subject: tokenType
     }) as TDecodedToken;
   } catch (error) {
-    if (tokenType === 'access') {
+    if (tokenType === "access") {
       return null;
     }
     return error;

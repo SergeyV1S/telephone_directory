@@ -1,6 +1,5 @@
 /* eslint-disable */
-
-import * as express from 'express';
+import * as express from "express";
 
 declare global {
   namespace Express {
