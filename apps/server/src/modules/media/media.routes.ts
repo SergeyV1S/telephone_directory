@@ -1,6 +1,7 @@
-import { isAuthenticated } from "@/middleware/auth.middleware";
 import { Router } from "express";
 import multer from "multer";
+
+import { isAuthenticated } from "@/middleware/auth.middleware";
 
 import * as uploadController from "./media.controller";
 

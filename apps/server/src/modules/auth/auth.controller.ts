@@ -1,12 +1,14 @@
+import type { NextFunction, Request, Response } from "express";
+
 import config from "@/config";
 import { sendResponse } from "@/lib/reponse";
 import { HttpStatus } from "@/utils/enums/http-status";
-import type { NextFunction, Request, Response } from "express";
 
-import * as authService from "./auth.service";
 import type { CreateUserDto } from "../user/dto/create-user.dto";
 import type { LoginUserDto } from "./dto/login.dto";
 import type { OAuthEnum } from "./enums/oauth.enum";
+
+import * as authService from "./auth.service";
 
 export async function register(
   req: Request<object, object, CreateUserDto>,

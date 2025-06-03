@@ -1,12 +1,13 @@
-import config from "@/config";
-import { db } from "@/db/drizzle/connect";
-import { ThumbnailImage, files, images } from "@/db/drizzle/schema/media/schema";
-import { CustomError } from "@/utils/custom_error";
-import { HttpStatus } from "@/utils/enums/http-status";
 import { S3 } from "aws-sdk";
 import path from "node:path";
 import sharp from "sharp";
 import { v4 } from "uuid";
+
+import config from "@/config";
+import { db } from "@/db/drizzle/connect";
+import { files, images, ThumbnailImage } from "@/db/drizzle/schema/media/schema";
+import { CustomError } from "@/utils/custom_error";
+import { HttpStatus } from "@/utils/enums/http-status";
 
 const isImage = (mimetype: string) => {
   return mimetype.startsWith("image/");
