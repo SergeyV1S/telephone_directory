@@ -1,15 +1,9 @@
+const baseConfig = require("./base");
+
 module.exports = {
-  printWidth: 100,
-  singleQuote: false,
-  jsxSingleQuote: true,
-  trailingComma: "none",
-  semi: true,
-  tabWidth: 2,
-  useTabs: false,
-  endOfLine: "lf",
-  arrowParens: "always",
+  ...baseConfig,
   importOrder: [
-    "^(react|react-dom|@hookform|axios|zod|@tanstack/*|react-number-format|zod|react-hook-form|express)$",
+    "^(react|react-dom|@hookform|axios|zod|@tanstack/*|react-number-format|zod|react-hook-form)$",
     "<THIRD_PARTY_MODULES>",
     "^@/(.*)$",
     "^[./]",

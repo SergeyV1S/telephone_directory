@@ -3,9 +3,14 @@
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
+  "exports": {
+    "./server": "./server.js",
+    "./client": "./client.js"
+  },
   "devDependencies": {
-    "prettier": "^3.4.2",
+    "@siberiacancode/prettier": "^1.3.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9"
   },
   "publishConfig": {

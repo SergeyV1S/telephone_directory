@@ -1,7 +1,7 @@
-import { relations } from "drizzle-orm";
+import { relations } from 'drizzle-orm';
 
-import { users } from "../user/schema";
-import { files, images } from "./schema";
+import { users } from '../user/schema';
+import { files, images } from './schema';
 
 export const imagesRelations = relations(images, ({ one }) => ({
   usersRelation: one(users, {

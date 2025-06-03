@@ -1,5 +1,5 @@
-import type { InsertUser } from "@/db/drizzle/schema/user/schema";
-import type { RoleType } from "@/db/drizzle/schema/user/types/role.type";
+import type { InsertUser } from '@/db/drizzle/schema/user/schema';
+import type { RoleType } from '@/db/drizzle/schema/user/types/role.type';
 
 export class CreateUserDto implements InsertUser {
   firstName: string;

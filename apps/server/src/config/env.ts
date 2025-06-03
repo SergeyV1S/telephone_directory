@@ -1,6 +1,5 @@
-import { z } from "zod";
-
-import "dotenv/config";
+import { z } from 'zod';
+import 'dotenv/config';
 
 const envSchema = z.object({
   APPNAME: z.string(),
@@ -16,7 +15,7 @@ const envSchema = z.object({
   DATABASE_USER: z.string(),
   DATABASE_PASSWORD: z.string(),
   DATABASE_NAME: z.string(),
-  DATABASE_URL: z.string().startsWith("postgresql://"),
+  DATABASE_URL: z.string().startsWith('postgresql://'),
   JWT_ACCESS_SECRET: z.string(),
   JWT_REFRESH_SECRET: z.string(),
   ACCESS_TOKEN_EXPIRES_IN: z.string(),

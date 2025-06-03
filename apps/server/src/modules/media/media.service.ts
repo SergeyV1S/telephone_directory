@@ -1,20 +1,20 @@
-import { S3 } from "aws-sdk";
-import path from "node:path";
-import sharp from "sharp";
-import { v4 } from "uuid";
+import { S3 } from 'aws-sdk';
+import path from 'node:path';
+import sharp from 'sharp';
+import { v4 } from 'uuid';
 
-import config from "@/config";
-import { db } from "@/db/drizzle/connect";
-import { ThumbnailImage, files, images } from "@/db/drizzle/schema/media/schema";
-import { CustomError } from "@/utils/custom_error";
-import { HttpStatus } from "@/utils/enums/http-status";
+import config from '@/config';
+import { db } from '@/db/drizzle/connect';
+import { files, images, ThumbnailImage } from '@/db/drizzle/schema/media/schema';
+import { CustomError } from '@/utils/custom_error';
+import { HttpStatus } from '@/utils/enums/http-status';
 
 const isImage = (mimetype: string) => {
-  return mimetype.startsWith("image/");
+  return mimetype.startsWith('image/');
 };
 
 const isPDF = (mimetype: string) => {
-  return mimetype === "application/pdf";
+  return mimetype === 'application/pdf';
 };
 
 const convertImg = async (rawImg: Express.Multer.File): Promise<sharp.Sharp> => {
@@ -22,7 +22,7 @@ const convertImg = async (rawImg: Express.Multer.File): Promise<sharp.Sharp> => 
     const img = sharp(rawImg.buffer);
     const metadata = await img.metadata();
 
-    if (metadata.format === "webp") {
+    if (metadata.format === 'webp') {
       return img;
     }
 
@@ -39,10 +39,10 @@ export const uploadPublicFile = async (buffer: Buffer, extension: string, folder
       secretAccessKey: config.bucket.secret,
       endpoint: config.bucket.endpoint
     });
-    let key = "";
-    if (folder === "PDF") {
+    let key = '';
+    if (folder === 'PDF') {
       key = `ITUGRA/PDF/${v4()}${extension}`;
-    } else if (folder === "images") {
+    } else if (folder === 'images') {
       key = `ITUGRA/images/${v4()}${extension}`;
     }
     const res = await s3
@@ -64,14 +64,14 @@ export const uploadFile = async (file: Express.Multer.File, uploaderUid: string)
       const convertedOrigin = await convertImg(file);
       const originBuffer = await convertedOrigin.toBuffer();
       const thumbnail = await createThumbnail(convertedOrigin);
-      const res = await uploadPublicFile(originBuffer, ".webp", "images");
+      const res = await uploadPublicFile(originBuffer, '.webp', 'images');
       const image = await db
         .insert(images)
         .values({
           key: res.Key,
           name: file.originalname,
-          thumbnail: thumbnail || new ThumbnailImage(res.Location, "image/webp"),
-          fileType: "image/webp",
+          thumbnail: thumbnail || new ThumbnailImage(res.Location, 'image/webp'),
+          fileType: 'image/webp',
           url: res.Location,
           uploaderUid
         })
@@ -81,7 +81,7 @@ export const uploadFile = async (file: Express.Multer.File, uploaderUid: string)
       const uploadedRes = await uploadPublicFile(
         file.buffer,
         path.extname(file.originalname),
-        "PDF"
+        'PDF'
       );
       const uploadedFile = await db
         .insert(files)
@@ -121,11 +121,11 @@ const createThumbnail = async (img: sharp.Sharp) => {
       width = Math.round(metadata.width * (thumbnailSize / metadata.height));
     }
 
-    const thumbnail = await img.resize({ width, height, fit: "contain" }).toBuffer();
+    const thumbnail = await img.resize({ width, height, fit: 'contain' }).toBuffer();
 
-    const res = await uploadPublicFile(thumbnail, "_thumb.webp", "images");
+    const res = await uploadPublicFile(thumbnail, '_thumb.webp', 'images');
 
-    return new ThumbnailImage(res.Location, "image/webp");
+    return new ThumbnailImage(res.Location, 'image/webp');
   } catch (error) {
     throw error;
   }

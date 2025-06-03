@@ -1,13 +1,14 @@
-import type { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from 'express';
 
-import config from "@/config";
-import { sendResponse } from "@/lib/reponse";
-import { HttpStatus } from "@/utils/enums/http-status";
+import config from '@/config';
+import { sendResponse } from '@/lib/reponse';
+import { HttpStatus } from '@/utils/enums/http-status';
 
-import * as authService from "./auth.service";
-import type { CreateUserDto } from "../user/dto/create-user.dto";
-import type { LoginUserDto } from "./dto/login.dto";
-import type { OAuthEnum } from "./enums/oauth.enum";
+import type { CreateUserDto } from '../user/dto/create-user.dto';
+import type { LoginUserDto } from './dto/login.dto';
+import type { OAuthEnum } from './enums/oauth.enum';
+
+import * as authService from './auth.service';
 
 export async function register(
   req: Request<object, object, CreateUserDto>,
@@ -59,17 +60,17 @@ export async function login(
 
 export async function logout(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    res.cookie(`${config.app.name}-access-token`, "", {
+    res.cookie(`${config.app.name}-access-token`, '', {
       expires: new Date(0),
       httpOnly: true
     });
-    res.cookie(`${config.app.name}-refresh-token`, "", {
+    res.cookie(`${config.app.name}-refresh-token`, '', {
       expires: new Date(0),
       httpOnly: true
     });
 
     if (!req.user) {
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json({ message: 'Something went wrong' });
       return;
     }
 

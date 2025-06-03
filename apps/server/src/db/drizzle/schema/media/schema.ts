@@ -1,6 +1,6 @@
-import { jsonb, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
+import { jsonb, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
 
-import { baseSchema } from "../base.schema";
+import { baseSchema } from '../base.schema';
 
 export class ThumbnailImage {
   url: string;
@@ -12,21 +12,21 @@ export class ThumbnailImage {
   }
 }
 
-export const files = pgTable("files", {
+export const files = pgTable('files', {
   ...baseSchema,
-  key: varchar("key", { length: 255 }).notNull(),
-  url: varchar("url", { length: 255 }).notNull(),
-  fileType: varchar("file_type", { length: 255 }).notNull(),
-  name: varchar("name", { length: 255 }).notNull(),
-  uploaderUid: uuid("uploaderUid").notNull()
+  key: varchar('key', { length: 255 }).notNull(),
+  url: varchar('url', { length: 255 }).notNull(),
+  fileType: varchar('file_type', { length: 255 }).notNull(),
+  name: varchar('name', { length: 255 }).notNull(),
+  uploaderUid: uuid('uploaderUid').notNull()
 });
 
-export const images = pgTable("images", {
+export const images = pgTable('images', {
   ...baseSchema,
-  key: varchar("key", { length: 255 }).notNull(),
-  url: varchar("url", { length: 255 }).notNull(),
-  fileType: varchar("file_type", { length: 255 }).notNull(),
-  name: varchar("name", { length: 255 }).notNull(),
-  uploaderUid: uuid("uploaderUid").notNull(),
-  thumbnail: jsonb("thumbnail").$type<ThumbnailImage>().notNull()
+  key: varchar('key', { length: 255 }).notNull(),
+  url: varchar('url', { length: 255 }).notNull(),
+  fileType: varchar('file_type', { length: 255 }).notNull(),
+  name: varchar('name', { length: 255 }).notNull(),
+  uploaderUid: uuid('uploaderUid').notNull(),
+  thumbnail: jsonb('thumbnail').$type<ThumbnailImage>().notNull()
 });
