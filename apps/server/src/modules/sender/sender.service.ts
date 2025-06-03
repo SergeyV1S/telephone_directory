@@ -1,7 +1,8 @@
-import config from "@/config";
 import { resolve } from "node:path";
 import { createTransport } from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
+
+import config from "@/config";
 
 import type { MailDto } from "./dto/mail.dto";
 import type { SendOptions } from "./types/send-mail.type";

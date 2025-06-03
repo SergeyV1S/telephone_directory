@@ -1,6 +1,7 @@
+import type { NextFunction, Request, Response } from "express";
+
 import { sendResponse } from "@/lib/reponse";
 import { HttpStatus } from "@/utils/enums/http-status";
-import type { NextFunction, Request, Response } from "express";
 
 import * as uploadService from "./media.service";
 

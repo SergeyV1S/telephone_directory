@@ -1,5 +1,6 @@
-import config from "@/config";
 import jwt from "jsonwebtoken";
+
+import config from "@/config";
 
 import type { TDecodedToken } from "../types/decodedToken.interface";
 
