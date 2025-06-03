@@ -1,19 +1,19 @@
-import { compare } from 'bcrypt';
+import { compare } from "bcrypt";
 
-import config from '@/config';
-import { ipRateLimiter } from '@/lib/ip-rate-limiter';
-import { CustomError } from '@/utils/custom_error';
-import { ErrorMessage } from '@/utils/enums/errors';
-import { HttpStatus } from '@/utils/enums/http-status';
+import config from "@/config";
+import { ipRateLimiter } from "@/lib/ip-rate-limiter";
+import { CustomError } from "@/utils/custom_error";
+import { ErrorMessage } from "@/utils/enums/errors";
+import { HttpStatus } from "@/utils/enums/http-status";
 
-import type { CreateUserDto } from '../user/dto/create-user.dto';
-import type { TokenDto } from './dto/create-token.dto';
-import type { LoginUserDto } from './dto/login.dto';
-import type { OAuthEnum } from './enums/oauth.enum';
-import type { IOAuthDataResponse, IOAuthTokenResponse } from './types/oauth.interface';
+import type { CreateUserDto } from "../user/dto/create-user.dto";
+import type { TokenDto } from "./dto/create-token.dto";
+import type { LoginUserDto } from "./dto/login.dto";
+import type { OAuthEnum } from "./enums/oauth.enum";
+import type { IOAuthDataResponse, IOAuthTokenResponse } from "./types/oauth.interface";
 
-import * as userService from '../user/user.service';
-import * as jwtService from './jwt.service';
+import * as userService from "../user/user.service";
+import * as jwtService from "./jwt.service";
 
 export const login = async (userData: LoginUserDto, ip: string) => {
   try {
@@ -21,7 +21,7 @@ export const login = async (userData: LoginUserDto, ip: string) => {
     const payload: TokenDto = {
       role: user.role,
       uid: user.uid,
-      oAuthId: user.oAuthId ? user.oAuthId : ''
+      oAuthId: user.oAuthId ? user.oAuthId : ""
     };
     const data = { role: user.role };
     return { ...(await jwtService.createTokenAsync(payload)), data };
@@ -36,7 +36,7 @@ export const register = async (userData: CreateUserDto) => {
     const payload: TokenDto = {
       role: user.role,
       uid: user.uid,
-      oAuthId: userData.oAuthId ? userData.oAuthId : ''
+      oAuthId: userData.oAuthId ? userData.oAuthId : ""
     };
     const data = { role: user.role };
     return { ...(await jwtService.createTokenAsync(payload)), data };
@@ -54,12 +54,12 @@ export const logout = async (uid: string, oAuthId?: string) => {
         throw new CustomError(HttpStatus.UNAUTHORIZED, ErrorMessage.ERROR_AUTHORIZATION);
       }
 
-      const [_, token] = result.res[0].split(':');
+      const [_, token] = result.res[0].split(":");
       await jwtService.removeAllTokensByOAuthId(oAuthId);
       await fetch(`${config[result.value].tokenUrl}/revoke_token`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          "Content-Type": "application/x-www-form-urlencoded"
         },
         body: new URLSearchParams({
           access_token: token,
@@ -80,7 +80,7 @@ export const refresh = async (refreshToken: string) => {
     if (!result) {
       throw new CustomError(HttpStatus.UNAUTHORIZED);
     }
-    const [userUid] = result[0].split(':');
+    const [userUid] = result[0].split(":");
     const user = await userService.getUserByUID(userUid);
     const tokens = await jwtService.createTokenAsync({
       uid: userUid,
@@ -111,7 +111,7 @@ const validateUser = async (userData: LoginUserDto, ip: string) => {
       return result;
     } else if (user && !passwordEquals) {
       const rateLimiter = await ipRateLimiter(
-        'rate-limiter:login',
+        "rate-limiter:login",
         ip,
         config.app.rateLimiterSettings.loginAttempts,
         config.app.rateLimiterSettings.loginTimer
@@ -131,12 +131,12 @@ const validateUser = async (userData: LoginUserDto, ip: string) => {
 export const oAuth = async (code: string, type: OAuthEnum) => {
   try {
     const tokenResponse = await fetch(`${config[type].tokenUrl}/token`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       body: new URLSearchParams({
-        grant_type: 'authorization_code',
+        grant_type: "authorization_code",
         code,
         client_id: config[type].clientID,
         client_secret: config[type].clientSecret
@@ -144,7 +144,7 @@ export const oAuth = async (code: string, type: OAuthEnum) => {
     });
 
     if (!tokenResponse.ok) {
-      throw new Error('Failed to fetch OAuth token');
+      throw new Error("Failed to fetch OAuth token");
     }
 
     const tokens: IOAuthTokenResponse = await tokenResponse.json();
@@ -154,7 +154,7 @@ export const oAuth = async (code: string, type: OAuthEnum) => {
     );
 
     if (!userDataResponse.ok) {
-      throw new Error('Failed to fetch user data');
+      throw new Error("Failed to fetch user data");
     }
 
     const userData: IOAuthDataResponse = await userDataResponse.json();
@@ -174,7 +174,7 @@ export const oAuth = async (code: string, type: OAuthEnum) => {
         secondName: userData.last_name,
         mail: userData.default_email,
         phone: userData.default_phone.number,
-        role: 'USER'
+        role: "USER"
       });
       return data;
     }

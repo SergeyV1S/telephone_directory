@@ -1,14 +1,14 @@
-import type { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from "express";
 
-import config from '@/config';
-import { refresh } from '@/modules/auth/auth.service';
-import token from '@/modules/auth/lib/token';
-import { CustomError } from '@/utils/custom_error';
-import { ErrorMessage } from '@/utils/enums/errors';
-import { HttpStatus } from '@/utils/enums/http-status';
+import config from "@/config";
+import { refresh } from "@/modules/auth/auth.service";
+import token from "@/modules/auth/lib/token";
+import { CustomError } from "@/utils/custom_error";
+import { ErrorMessage } from "@/utils/enums/errors";
+import { HttpStatus } from "@/utils/enums/http-status";
 
-import { extractAccessTokenFromCookie } from './lib/extractAccessTokenFromCookie';
-import { extractRefreshTokenFromCookie } from './lib/extractRefreshTokenFromCookie';
+import { extractAccessTokenFromCookie } from "./lib/extractAccessTokenFromCookie";
+import { extractRefreshTokenFromCookie } from "./lib/extractRefreshTokenFromCookie";
 
 export async function isAuthenticated(req: Request, res: Response, next: NextFunction) {
   try {
@@ -18,7 +18,7 @@ export async function isAuthenticated(req: Request, res: Response, next: NextFun
     if (extractedToken) {
       user = token.verify({
         token: extractedToken,
-        tokenType: 'access'
+        tokenType: "access"
       });
 
       if (user) {
@@ -39,7 +39,7 @@ export async function isAuthenticated(req: Request, res: Response, next: NextFun
 
     user = token.verify({
       token: refreshedTokens.token,
-      tokenType: 'access'
+      tokenType: "access"
     });
 
     res.cookie(`${config.app.name}-access-token`, refreshedTokens.token, {

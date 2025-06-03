@@ -1,13 +1,13 @@
-import { hash } from 'bcrypt';
-import { eq, or } from 'drizzle-orm';
+import { hash } from "bcrypt";
+import { eq, or } from "drizzle-orm";
 
-import { db } from '@/db/drizzle/connect';
-import { users } from '@/db/drizzle/schema/user/schema';
-import { CustomError } from '@/utils/custom_error';
-import { HttpStatus } from '@/utils/enums/http-status';
+import { db } from "@/db/drizzle/connect";
+import { users } from "@/db/drizzle/schema/user/schema";
+import { CustomError } from "@/utils/custom_error";
+import { HttpStatus } from "@/utils/enums/http-status";
 
-import type { LoginUserDto } from '../auth/dto/login.dto';
-import type { CreateUserDto } from './dto/create-user.dto';
+import type { LoginUserDto } from "../auth/dto/login.dto";
+import type { CreateUserDto } from "./dto/create-user.dto";
 
 export const getUserByUID = async (uid: string) => {
   try {
@@ -83,7 +83,7 @@ export const getUserProfile = async (userUid: string) => {
       .from(users)
       .where(eq(users.uid, userUid));
     if (!data[0]) {
-      throw new CustomError(HttpStatus.NOT_FOUND, 'Пользователь не найден');
+      throw new CustomError(HttpStatus.NOT_FOUND, "Пользователь не найден");
     }
 
     return data[0];
