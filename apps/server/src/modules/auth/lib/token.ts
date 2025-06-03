@@ -1,6 +1,5 @@
-import jwt from "jsonwebtoken";
-
 import config from "@/config";
+import jwt from "jsonwebtoken";
 
 import type { TDecodedToken } from "../types/decodedToken.interface";
 

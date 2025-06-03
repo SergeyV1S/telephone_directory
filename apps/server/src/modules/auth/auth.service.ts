@@ -1,19 +1,17 @@
-import { compare } from "bcrypt";
-
 import config from "@/config";
 import { ipRateLimiter } from "@/lib/ip-rate-limiter";
 import { CustomError } from "@/utils/custom_error";
 import { ErrorMessage } from "@/utils/enums/errors";
 import { HttpStatus } from "@/utils/enums/http-status";
+import { compare } from "bcrypt";
 
+import * as userService from "../user/user.service";
+import * as jwtService from "./jwt.service";
 import type { CreateUserDto } from "../user/dto/create-user.dto";
 import type { TokenDto } from "./dto/create-token.dto";
 import type { LoginUserDto } from "./dto/login.dto";
 import type { OAuthEnum } from "./enums/oauth.enum";
 import type { IOAuthDataResponse, IOAuthTokenResponse } from "./types/oauth.interface";
-
-import * as userService from "../user/user.service";
-import * as jwtService from "./jwt.service";
 
 export const login = async (userData: LoginUserDto, ip: string) => {
   try {

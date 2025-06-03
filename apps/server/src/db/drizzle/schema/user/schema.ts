@@ -1,8 +1,7 @@
 import { date, pgTable, text, unique, uuid, varchar } from "drizzle-orm/pg-core";
 
-import type { RoleType } from "./types/role.type";
-
 import { baseSchema } from "../base.schema";
+import type { RoleType } from "./types/role.type";
 
 export const users = pgTable(
   "users",

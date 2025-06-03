@@ -1,10 +1,9 @@
-import { hash } from "bcrypt";
-import { eq, or } from "drizzle-orm";
-
 import { db } from "@/db/drizzle/connect";
 import { users } from "@/db/drizzle/schema/user/schema";
 import { CustomError } from "@/utils/custom_error";
 import { HttpStatus } from "@/utils/enums/http-status";
+import { hash } from "bcrypt";
+import { eq, or } from "drizzle-orm";
 
 import type { LoginUserDto } from "../auth/dto/login.dto";
 import type { CreateUserDto } from "./dto/create-user.dto";

@@ -1,15 +1,14 @@
-import type { NextFunction, Request, Response } from "express";
-import type http from "node:http";
-
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import type { NextFunction, Request, Response } from "express";
 import express from "express";
 import morgan from "morgan";
+import type http from "node:http";
 import swaggerUi from "swagger-ui-express";
 
 import config from "./config";
 import redisClient from "./db/redis";
-import { logger, LoggerStream } from "./lib/loger";
+import { LoggerStream, logger } from "./lib/loger";
 import { sendResponse } from "./lib/reponse";
 import router from "./modules/main.router";
 import swaggerDocument from "./swagger.json";

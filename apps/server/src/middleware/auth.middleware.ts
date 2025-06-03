@@ -1,11 +1,10 @@
-import type { NextFunction, Request, Response } from "express";
-
 import config from "@/config";
 import { refresh } from "@/modules/auth/auth.service";
 import token from "@/modules/auth/lib/token";
 import { CustomError } from "@/utils/custom_error";
 import { ErrorMessage } from "@/utils/enums/errors";
 import { HttpStatus } from "@/utils/enums/http-status";
+import type { NextFunction, Request, Response } from "express";
 
 import { extractAccessTokenFromCookie } from "./lib/extractAccessTokenFromCookie";
 import { extractRefreshTokenFromCookie } from "./lib/extractRefreshTokenFromCookie";
