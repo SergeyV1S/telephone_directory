@@ -6,12 +6,11 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
 
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./src/*"]
     },
 
-    /* Bundler mode */
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx"
   },
