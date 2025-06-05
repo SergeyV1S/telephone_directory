@@ -65,7 +65,7 @@ const TableHead = ({
       data-slot='table-head'
       {...(!asChild && { tag: "h2", variant: "s_medium" })}
       className={cn(
-        "text-foreground bg-(--base-dark-3) border-b flex items-center h-10 px-4 py-6 font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "bg-base-dark-3 border-b flex items-center h-10 px-4 py-6 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         className
       )}
       {...props}

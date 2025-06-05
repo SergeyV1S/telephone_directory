@@ -1,6 +1,5 @@
 import { Container } from "@/components/Container";
 import {
-  Input,
   Select,
   SelectContent,
   SelectItem,
@@ -18,6 +17,8 @@ import {
   Typography
 } from "@/components/ui";
 
+import { SearchInput } from "./components/ui/searchInput";
+
 const App = () => (
   <Container>
     <Table>
@@ -25,7 +26,7 @@ const App = () => (
         <div className='flex items-center gap-3'>
           <p>Записи</p>
           <Select defaultValue='10'>
-            <SelectTrigger className='max-w-24'>
+            <SelectTrigger className='w-24'>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -36,7 +37,7 @@ const App = () => (
             </SelectContent>
           </Select>
         </div>
-        <Input placeholder='' className='max-w-96' />
+        <SearchInput placeholder='Введите текст' className='max-w-96' />
       </TableCaption>
       <TableContent>
         <TableHeader>
