@@ -14,7 +14,8 @@ import {
   TableFooter,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
+  Typography
 } from "@/components/ui";
 
 const App = () => (
@@ -64,7 +65,7 @@ const App = () => (
         </TableBody>
       </TableContent>
       <TableFooter>
-        <p>Показано с 1 по 10 из 8485 записей</p>
+        <Typography>Показано с 1 по 10 из 8485 записей</Typography>
         <nav>nav</nav>
       </TableFooter>
     </Table>
