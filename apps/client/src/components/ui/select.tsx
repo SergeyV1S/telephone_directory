@@ -3,7 +3,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 import { cn } from "@/helpers/utils";
 
-import { typographyVariants } from "./typography";
+import { Typography, typographyVariants } from "./typography";
 
 const Select = ({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) => (
   <SelectPrimitive.Root data-slot='select' {...props} />
@@ -102,7 +102,9 @@ const SelectItem = ({
         <div className='w-1 h-9 bg-bright-blue' />
       </SelectPrimitive.ItemIndicator>
     </span>
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    <SelectPrimitive.ItemText>
+      <Typography>{children}</Typography>
+    </SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 );
 

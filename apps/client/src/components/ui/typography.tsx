@@ -16,12 +16,12 @@ const typographyVariants = cva(
   {
     variants: {
       variant: {
-        xl_medium: "font-medium text-xl leading-[130%]",
-        L_medium: "font-medium text-lg leading-[130%]",
-        m_medium: "font-medium text-base leading-[130%]",
-        s_medium: "font-medium text-sm leading-[130%]",
-        xs: "font-normal text-xs leading-[150%]",
-        s: "font-normal text-sm leading-[150%]"
+        xl_medium: "font-medium text-3xl 3xl:text-5xl leading-[130%]",
+        L_medium: "font-medium text-2xl 3xl:text-4xl leading-[130%]",
+        m_medium: "font-medium text-xl 3xl:text-3xl leading-[130%]",
+        s_medium: "font-medium text-lg 3xl:text-2xl leading-[130%]",
+        xs: "font-normal text-bas e 3xl:text-xl leading-[150%]",
+        s: "font-normal text-lg 3xl:text-2xl leading-[150%]"
       }
     },
     defaultVariants: {

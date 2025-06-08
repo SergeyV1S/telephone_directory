@@ -36,7 +36,7 @@ export const TableNav = ({ totalPages }: ITableNavProps) => {
         <Input
           value={currentPage}
           onChange={(e) => setValue("currentPage", +e.target.value)}
-          className='max-w-10'
+          className='max-w-14'
           autoComplete='off'
         />
         <Typography>из</Typography>

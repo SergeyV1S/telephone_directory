@@ -40,7 +40,7 @@ export const DirectoryTable = () => {
     <Table>
       <TableCaption>
         <div className='flex items-center gap-3'>
-          <p>Записи</p>
+          <Typography variant='xs'>Записи</Typography>
           <Select
             defaultValue={currentLimit.toString()}
             onValueChange={(newLimit) => setValue("currentLimit", +newLimit)}

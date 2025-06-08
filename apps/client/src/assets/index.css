@@ -53,6 +53,7 @@
   --color-blue-50: var(--blue-50);
   --color-bright-blue: var(--bright-blue);
   --color-input-border: var(--input-border);
+  --breakpoint-3xl: 120rem;
 }
 
 :root {
