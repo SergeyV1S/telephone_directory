@@ -37,7 +37,7 @@ export const DirectoryTable = () => {
   }, [currentLimit, currentPage]);
 
   return (
-    <Table>
+    <Table className='mt-5'>
       <TableCaption>
         <div className='flex items-center gap-3'>
           <Typography variant='xs'>Записи</Typography>

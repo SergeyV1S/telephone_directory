@@ -54,6 +54,7 @@
   --color-bright-blue: var(--bright-blue);
   --color-input-border: var(--input-border);
   --breakpoint-3xl: 120rem;
+  --spacing-8xl: 120rem;
 }
 
 :root {

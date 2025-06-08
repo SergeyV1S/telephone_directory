@@ -1,8 +1,12 @@
 import { Container } from "@/components/Container";
 import { DirectoryTable } from "@/components/DirectoryTable";
+import { Header } from "@/components/Header";
 
 export const App = () => (
-  <Container>
-    <DirectoryTable />
-  </Container>
+  <>
+    <Header />
+    <Container>
+      <DirectoryTable />
+    </Container>
+  </>
 );
