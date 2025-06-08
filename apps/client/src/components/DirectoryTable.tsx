@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
-import { useTestStore } from "@/store";
+import { FIFTY_RECORDS, ONE_HUNDRED_RECORDS, TEN_RECORDS, TTWENTY_FIVE_RECORDS } from "@/constants";
+import { useDirectoryStore } from "@/store";
 
 import { TableNav } from "./TableNav";
 import {
@@ -23,17 +24,16 @@ import {
 } from "./ui";
 
 export const DirectoryTable = () => {
-  const { testData, loading, currentLimit, currentPage, fetchTestData, setValue } = useTestStore();
+  const { testData, loading, currentLimit, currentPage, fetchTestData, setValue } =
+    useDirectoryStore();
 
   const dataLength = 5000;
   const startRecord = testData.length > 0 ? testData[0]?.id : currentLimit + 2;
   const endRecord = testData[testData.length - 1]?.id;
   const totalPages = dataLength / currentLimit;
 
-  const onLimitChangeHandler = (newLimit: string) => setValue("currentLimit", +newLimit);
-
   useEffect(() => {
-    fetchTestData(currentLimit.toString(), currentPage.toString());
+    fetchTestData(currentLimit, currentPage);
   }, [currentLimit, currentPage]);
 
   return (
@@ -41,15 +41,18 @@ export const DirectoryTable = () => {
       <TableCaption>
         <div className='flex items-center gap-3'>
           <p>Записи</p>
-          <Select defaultValue={currentLimit.toString()} onValueChange={onLimitChangeHandler}>
+          <Select
+            defaultValue={currentLimit.toString()}
+            onValueChange={(newLimit) => setValue("currentLimit", +newLimit)}
+          >
             <SelectTrigger className='w-24'>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value='10'>10</SelectItem>
-              <SelectItem value='25'>25</SelectItem>
-              <SelectItem value='50'>50</SelectItem>
-              <SelectItem value='100'>100</SelectItem>
+              <SelectItem value={TEN_RECORDS}>{TEN_RECORDS}</SelectItem>
+              <SelectItem value={TTWENTY_FIVE_RECORDS}>{TTWENTY_FIVE_RECORDS}</SelectItem>
+              <SelectItem value={FIFTY_RECORDS}>{FIFTY_RECORDS}</SelectItem>
+              <SelectItem value={ONE_HUNDRED_RECORDS}>{ONE_HUNDRED_RECORDS}</SelectItem>
             </SelectContent>
           </Select>
         </div>

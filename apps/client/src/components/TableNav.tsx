@@ -1,6 +1,6 @@
 import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
-import { useTestStore } from "@/store";
+import { useDirectoryStore } from "@/store";
 
 import { Button, Input, Typography } from "./ui";
 
@@ -9,7 +9,7 @@ interface ITableNavProps {
 }
 
 export const TableNav = ({ totalPages }: ITableNavProps) => {
-  const { currentPage, setValue } = useTestStore();
+  const { currentPage, setValue } = useDirectoryStore();
 
   const isPrevButtonsDisabled = currentPage === 1;
   const isNextButtonsDisabled = currentPage === totalPages;
@@ -35,9 +35,9 @@ export const TableNav = ({ totalPages }: ITableNavProps) => {
       <div className='flex items-center gap-2'>
         <Input
           value={currentPage}
-          onBlur={(e) => setValue("currentPage", +e.target.value)}
+          onChange={(e) => setValue("currentPage", +e.target.value)}
           className='max-w-10'
-          autoComplete='false'
+          autoComplete='off'
         />
         <Typography>из</Typography>
         <Typography>{totalPages}</Typography>

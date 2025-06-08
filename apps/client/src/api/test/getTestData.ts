@@ -9,8 +9,8 @@ export interface ITestData {
 }
 
 interface IGetTestDataParams {
-  limit: string;
-  page: string;
+  limit: number;
+  page: number;
 }
 
 interface IGetTestDataResponse extends ITestData {}

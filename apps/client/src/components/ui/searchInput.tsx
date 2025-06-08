@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { SearchIcon } from "lucide-react";
 
-import { cn } from "@/lib";
+import { cn } from "@/helpers";
 
 import { Input } from "./input";
 

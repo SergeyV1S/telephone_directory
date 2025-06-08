@@ -1,11 +1,8 @@
 import { Container } from "@/components/Container";
+import { DirectoryTable } from "@/components/DirectoryTable";
 
-import { DirectoryTable } from "./components/DirectoryTable";
-
-const App = () => (
+export const App = () => (
   <Container>
     <DirectoryTable />
   </Container>
 );
-
-export default App;

@@ -1,23 +1,10 @@
 import { create } from "zustand";
 
-import type { ITestData } from "@/api/test/getTestData";
 import { getTestData } from "@/api/test/getTestData";
 
-interface ITestState {
-  testData: ITestData[];
-  loading: boolean;
-  currentLimit: number;
-  currentPage: number;
-}
+import type { TDirectoryStore } from "./types";
 
-interface ITestActions {
-  setValue: <T extends keyof ITestState>(field: T, value: ITestState[T]) => void;
-  fetchTestData: (limit: string, page: string) => void;
-}
-
-type TTestStore = ITestState & ITestActions;
-
-export const useTestStore = create<TTestStore>((set) => ({
+export const useDirectoryStore = create<TDirectoryStore>((set) => ({
   testData: [],
   loading: false,
   currentLimit: 10,
