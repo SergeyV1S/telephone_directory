@@ -5,25 +5,27 @@ import { cn } from "@/helpers/utils";
 import { Typography } from "./typography";
 
 const Table = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div data-slot='table-container' className='relative w-full bg-white rounded-sm p-4 shadow-table'>
-    <div data-slot='table' className={cn("w-full space-y-3", className)} {...props} />
-  </div>
+  <div
+    data-slot='table-container'
+    className={cn("relative w-full space-y-5 bg-white rounded-sm p-4 shadow-table", className)}
+    {...props}
+  />
 );
 
 const TableHeader = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div data-slot='table-header' className={cn("w-full pt-1", className)} {...props}>
-    <div className=''>{props.children}</div>
-  </div>
+  <div
+    data-slot='table-header'
+    className={cn("w-full sticky top-0 z-10 bg-white", className)}
+    {...props}
+  />
 );
 
 const TableContent = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
-    data-slot='table-header'
-    className={cn("w-full pt-1 max-h-[700px] overflow-auto", className)}
+    data-slot='table-content'
+    className={cn("relative w-full max-h-[850px] overflow-auto", className)}
     {...props}
-  >
-    <div className=''>{props.children}</div>
-  </div>
+  />
 );
 
 const TableBody = ({ className, ...props }: React.ComponentProps<"div">) => (
@@ -44,7 +46,7 @@ const TableRow = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     data-slot='table-row'
     className={cn(
-      "w-full grid grid-cols-[60px_repeat(7,minmax(140px,1fr))] px-3 transition-colors",
+      "w-full grid grid-cols-[60px_repeat(7,minmax(140px,1fr))] transition-colors",
       className
     )}
     {...props}
@@ -64,10 +66,7 @@ const TableHead = ({
     <Comp
       data-slot='table-head'
       {...(!asChild && { tag: "h2", variant: "s_medium" })}
-      className={cn(
-        "bg-base-dark-3 border-b flex items-center h-10 px-4 py-6 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
-      )}
+      className={cn("bg-base-dark-3 border-b flex items-center h-10 px-4 py-6", className)}
       {...props}
     />
   );
@@ -85,10 +84,7 @@ const TableCell = ({
   return (
     <Comp
       data-slot='table-cell'
-      className={cn(
-        "px-4 py-3 align-middle border-b [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
-      )}
+      className={cn("px-4 py-3 align-middle border-b", className)}
       {...props}
     />
   );

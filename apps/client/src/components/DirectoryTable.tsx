@@ -24,7 +24,7 @@ import {
 } from "./ui";
 
 export const DirectoryTable = () => {
-  const { testData, loading, currentLimit, currentPage, fetchTestData, setValue } =
+  const { testData, isLoading, currentLimit, currentPage, fetchTestData, setValue } =
     useDirectoryStore();
 
   const dataLength = 5000;
@@ -72,7 +72,7 @@ export const DirectoryTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {loading && testData.length === 0 ? (
+          {isLoading && testData.length === 0 ? (
             <div className=''>Загрузка</div>
           ) : (
             testData.map((element) => (

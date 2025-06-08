@@ -2,7 +2,7 @@ import type { ITestData } from "@/api/test/getTestData";
 
 interface IDirectoryState {
   testData: ITestData[];
-  loading: boolean;
+  isLoading: boolean;
   currentLimit: number;
   currentPage: number;
 }

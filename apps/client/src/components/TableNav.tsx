@@ -9,10 +9,10 @@ interface ITableNavProps {
 }
 
 export const TableNav = ({ totalPages }: ITableNavProps) => {
-  const { currentPage, setValue } = useDirectoryStore();
+  const { currentPage, isLoading, setValue } = useDirectoryStore();
 
-  const isPrevButtonsDisabled = currentPage === 1;
-  const isNextButtonsDisabled = currentPage === totalPages;
+  const isPrevButtonsDisabled = isLoading || currentPage === 1;
+  const isNextButtonsDisabled = isLoading || currentPage === totalPages;
 
   return (
     <nav className='flex items-center gap-2'>
