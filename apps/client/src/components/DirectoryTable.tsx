@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useTestStore } from "@/store";
 
+import { TableNav } from "./TableNav";
 import {
   SearchInput,
   Select,
@@ -22,26 +23,25 @@ import {
 } from "./ui";
 
 export const DirectoryTable = () => {
-  const { testData, loading, fetchTestData } = useTestStore();
-  const [limit, setLimit] = useState("10");
-  const [page] = useState("2");
+  const { testData, loading, currentLimit, currentPage, fetchTestData, setValue } = useTestStore();
 
   const dataLength = 5000;
-  const startRecord = testData.length > 0 ? testData[0]?.id : limit + 2;
+  const startRecord = testData.length > 0 ? testData[0]?.id : currentLimit + 2;
   const endRecord = testData[testData.length - 1]?.id;
+  const totalPages = dataLength / currentLimit;
 
-  const onLimitChangeHandler = (newLimit: string) => setLimit(newLimit);
+  const onLimitChangeHandler = (newLimit: string) => setValue("currentLimit", +newLimit);
 
   useEffect(() => {
-    fetchTestData(limit, page);
-  }, [limit]);
+    fetchTestData(currentLimit.toString(), currentPage.toString());
+  }, [currentLimit, currentPage]);
 
   return (
     <Table>
       <TableCaption>
         <div className='flex items-center gap-3'>
           <p>Записи</p>
-          <Select defaultValue={limit} onValueChange={onLimitChangeHandler}>
+          <Select defaultValue={currentLimit.toString()} onValueChange={onLimitChangeHandler}>
             <SelectTrigger className='w-24'>
               <SelectValue />
             </SelectTrigger>
@@ -91,7 +91,7 @@ export const DirectoryTable = () => {
         <Typography>
           Показано с {startRecord} по {endRecord} из {dataLength} записей
         </Typography>
-        <nav>nav</nav>
+        <TableNav totalPages={totalPages} />
       </TableFooter>
     </Table>
   );
