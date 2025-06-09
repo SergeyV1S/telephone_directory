@@ -7,7 +7,10 @@ import { Typography } from "./typography";
 const Table = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     data-slot='table-container'
-    className={cn("relative w-full space-y-5 bg-white rounded-sm p-4 shadow-table", className)}
+    className={cn(
+      "relative flex flex-col size-full max-h-[950px] space-y-5 bg-white rounded-sm p-4 shadow-table",
+      className
+    )}
     {...props}
   />
 );
@@ -23,7 +26,7 @@ const TableHeader = ({ className, ...props }: React.ComponentProps<"div">) => (
 const TableContent = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     data-slot='table-content'
-    className={cn("relative w-full max-h-[850px] overflow-auto", className)}
+    className={cn("relative w-full flex-1 min-h-0 overflow-auto", className)}
     {...props}
   />
 );

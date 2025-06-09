@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import { BeatLoader } from "react-spinners";
+
 import { FIFTY_RECORDS, ONE_HUNDRED_RECORDS, TEN_RECORDS, TTWENTY_FIVE_RECORDS } from "@/constants";
 import { useDirectoryStore } from "@/store";
 
@@ -45,7 +47,7 @@ export const DirectoryTable = () => {
             defaultValue={currentLimit.toString()}
             onValueChange={(newLimit) => setValue("currentLimit", +newLimit)}
           >
-            <SelectTrigger className='w-24'>
+            <SelectTrigger className='w-24' disabled={isLoading}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -72,8 +74,11 @@ export const DirectoryTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {isLoading && testData.length === 0 ? (
-            <div className=''>Загрузка</div>
+          {isLoading ? (
+            <BeatLoader
+              className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+              color='var(--color-corporate)'
+            />
           ) : (
             testData.map((element) => (
               <TableRow key={element.id}>

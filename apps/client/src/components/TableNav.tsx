@@ -1,5 +1,6 @@
 import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
+import { useDebouncedInput } from "@/hooks";
 import { useDirectoryStore } from "@/store";
 
 import { Button, Input, Typography } from "./ui";
@@ -10,6 +11,10 @@ interface ITableNavProps {
 
 export const TableNav = ({ totalPages }: ITableNavProps) => {
   const { currentPage, isLoading, setValue } = useDirectoryStore();
+  const { inputValue, handleChange } = useDebouncedInput({
+    value: currentPage,
+    onChange: (page) => setValue("currentPage", Math.max(1, Math.min(page, totalPages)))
+  });
 
   const isPrevButtonsDisabled = isLoading || currentPage === 1;
   const isNextButtonsDisabled = isLoading || currentPage === totalPages;
@@ -28,17 +33,12 @@ export const TableNav = ({ totalPages }: ITableNavProps) => {
         size='icon'
         variant='ghost'
         disabled={isPrevButtonsDisabled}
-        onClick={() => setValue("currentPage", currentPage - 1)}
+        onClick={() => setValue("currentPage", Math.max(currentPage - 1, 1))}
       >
         <ChevronLeftIcon />
       </Button>
       <div className='flex items-center gap-2'>
-        <Input
-          value={currentPage}
-          onChange={(e) => setValue("currentPage", +e.target.value)}
-          className='max-w-14'
-          autoComplete='off'
-        />
+        <Input value={inputValue} onChange={handleChange} className='max-w-14' autoComplete='off' />
         <Typography>из</Typography>
         <Typography>{totalPages}</Typography>
       </div>
@@ -46,7 +46,7 @@ export const TableNav = ({ totalPages }: ITableNavProps) => {
         size='icon'
         variant='ghost'
         disabled={isNextButtonsDisabled}
-        onClick={() => setValue("currentPage", currentPage + 1)}
+        onClick={() => setValue("currentPage", Math.min(currentPage + 1, totalPages))}
       >
         <ChevronRightIcon />
       </Button>
