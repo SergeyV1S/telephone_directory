@@ -4,3 +4,4 @@ export * from "./table";
 export * from "./button";
 export * from "./typography";
 export * from "./searchInput";
+export * from "./sonner";
