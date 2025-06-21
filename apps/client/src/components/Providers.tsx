@@ -1,21 +1,33 @@
+import { useEffect } from "react";
+
 import { toast } from "sonner";
 
 import { useOnlineStatus } from "@/hooks";
 
-import { Toaster } from "./ui";
+import { Button, Toaster } from "./ui";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-  const isOnline = useOnlineStatus();
+  const { isOnline, wasOffline } = useOnlineStatus();
 
-  if (isOnline) {
-    toast.warning("Отсутствует подключение к интернету.", {
-      position: "top-center",
-      description: "Вы находитесь в оффлайн-режиме. Некоторые функции могут быть недоступны.",
-      richColors: true,
-      closeButton: true,
-      duration: 10000
-    });
-  }
+  useEffect(() => {
+    if (!isOnline) {
+      toast.warning("Отсутствует подключение к интернету.", {
+        position: "top-center",
+        description: "Вы находитесь в оффлайн-режиме. Некоторые функции могут быть недоступны.",
+        richColors: true,
+        closeButton: true,
+        dismissible: false
+      });
+    } else if (wasOffline) {
+      toast.success("Подключение восстановлено!", {
+        position: "top-center",
+        richColors: true,
+        closeButton: true,
+        action: <Button>Обновить</Button>,
+        dismissible: false
+      });
+    }
+  }, [isOnline]);
 
   return (
     <>
