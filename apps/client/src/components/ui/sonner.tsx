@@ -1,9 +1,11 @@
 import type { ToasterProps } from "sonner";
 import { Toaster as Sonner } from "sonner";
 
-const Toaster = ({ ...props }: ToasterProps) => (
+import { cn } from "@/helpers";
+
+const Toaster = ({ className, ...props }: ToasterProps) => (
   <Sonner
-    className='toaster group'
+    className={cn("toaster group", className)}
     style={
       {
         "--normal-bg": "var(--popover)",

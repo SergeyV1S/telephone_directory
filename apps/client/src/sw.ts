@@ -28,7 +28,3 @@ const apiRoute = new Route(
 );
 
 registerRoute(apiRoute);
-
-// const bgSyncPlugin = new BackgroundSyncPlugin("backgroundSyncQueue", {
-//   maxRetentionTime: 60 * 24
-// });

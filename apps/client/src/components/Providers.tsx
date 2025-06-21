@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import { useOnlineStatus } from "@/hooks";
 
-import { Button, Toaster } from "./ui";
+import { Toaster } from "./ui";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const { isOnline, wasOffline } = useOnlineStatus();
@@ -12,19 +12,14 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!isOnline) {
       toast.warning("Отсутствует подключение к интернету.", {
-        position: "top-center",
         description: "Вы находитесь в оффлайн-режиме. Некоторые функции могут быть недоступны.",
-        richColors: true,
         closeButton: true,
-        dismissible: false
+        duration: 10000
       });
     } else if (wasOffline) {
       toast.success("Подключение восстановлено!", {
-        position: "top-center",
-        richColors: true,
         closeButton: true,
-        action: <Button>Обновить</Button>,
-        dismissible: false
+        duration: 10000
       });
     }
   }, [isOnline]);
@@ -32,7 +27,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {children}
-      <Toaster />
+      <Toaster position='top-center' richColors={true} />
     </>
   );
 };
