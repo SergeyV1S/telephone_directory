@@ -19,10 +19,6 @@ const DialogPortal = ({ ...props }: React.ComponentProps<typeof DialogPrimitive.
   <DialogPrimitive.Portal data-slot='dialog-portal' {...props} />
 );
 
-const DialogClose = ({ ...props }: React.ComponentProps<typeof DialogPrimitive.Close>) => (
-  <DialogPrimitive.Close data-slot='dialog-close' {...props} />
-);
-
 const DialogOverlay = ({
   className,
   ...props
@@ -78,14 +74,6 @@ const DialogHeader = ({ className, ...props }: React.ComponentProps<"div">) => (
   />
 );
 
-const DialogFooter = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div
-    data-slot='dialog-footer'
-    className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)}
-    {...props}
-  />
-);
-
 const DialogTitle = ({
   className,
   ...props
@@ -97,23 +85,9 @@ const DialogTitle = ({
   />
 );
 
-const DialogDescription = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Description>) => (
-  <DialogPrimitive.Description
-    data-slot='dialog-description'
-    className={cn("text-muted-foreground text-sm", className)}
-    {...props}
-  />
-);
-
 export {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogOverlay,
   DialogPortal,

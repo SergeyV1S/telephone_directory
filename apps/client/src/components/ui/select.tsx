@@ -9,10 +9,6 @@ const Select = ({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>)
   <SelectPrimitive.Root data-slot='select' {...props} />
 );
 
-const SelectGroup = ({ ...props }: React.ComponentProps<typeof SelectPrimitive.Group>) => (
-  <SelectPrimitive.Group data-slot='select-group' {...props} />
-);
-
 const SelectValue = ({ ...props }: React.ComponentProps<typeof SelectPrimitive.Value>) => (
   <SelectPrimitive.Value data-slot='select-value' {...props} />
 );
@@ -73,17 +69,6 @@ const SelectContent = ({
   </SelectPrimitive.Portal>
 );
 
-const SelectLabel = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Label>) => (
-  <SelectPrimitive.Label
-    data-slot='select-label'
-    className={cn("px-2 py-1.5", className)}
-    {...props}
-  />
-);
-
 const SelectItem = ({
   className,
   children,
@@ -106,17 +91,6 @@ const SelectItem = ({
       <Typography>{children}</Typography>
     </SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
-);
-
-const SelectSeparator = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Separator>) => (
-  <SelectPrimitive.Separator
-    data-slot='select-separator'
-    className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
-    {...props}
-  />
 );
 
 const SelectScrollUpButton = ({
@@ -148,12 +122,9 @@ const SelectScrollDownButton = ({
 export {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectScrollDownButton,
   SelectScrollUpButton,
-  SelectSeparator,
   SelectTrigger,
   SelectValue
 };

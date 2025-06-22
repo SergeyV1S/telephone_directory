@@ -10,19 +10,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary shadow-xs hover:bg-primary/90",
+        default: "bg-corporate shadow-xs text-white hover:bg-corporate/90",
         destructive:
-          "bg-destructive shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "text-destructive fill-destructive hover:bg-accent focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "border bg-background shadow-xs hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary: "bg-secondary shadow-xs hover:bg-secondary/80",
-        ghost: "hover:bg-accent dark:hover:bg-accent/50",
-        link: "underline-offset-4 hover:underline"
+        secondary: "bg-bright-blue-light text-white shadow-xs hover:bg-bright-blue-light/80",
+        ghost: "hover:bg-accent dark:hover:bg-accent/50"
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        default: "h-10 px-4 py-2 has-[>svg]:px-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        lg: "h-11 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9"
       }
     },
@@ -51,8 +50,8 @@ const Button = ({
     <Comp
       data-slot='button'
       className={cn(
-        buttonVariants({ variant, size, className }),
-        typographyVariants({ variant: typographyVariant?.variant })
+        typographyVariants({ variant: typographyVariant?.variant }),
+        buttonVariants({ variant, size, className })
       )}
       {...props}
     />

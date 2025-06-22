@@ -34,6 +34,13 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
     }
   };
 
+  const handleDragLeave = () => setIsOver(false);
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!isOver) setIsOver(true);
+  };
+
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>
   ) => {
@@ -67,11 +74,8 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
 
       <div
         onDrop={handleDrop}
-        onDragLeave={() => setIsOver(false)}
-        onDragOver={(e) => {
-          e.preventDefault();
-          if (!isOver) setIsOver(true);
-        }}
+        onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
         onClick={handleClick}
         className={cn(
           "border-[4px] border-dashed hover:bg-muted py-14 px-24 flex items-center justify-center flex-col cursor-pointer rounded-3xl",
@@ -107,9 +111,9 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
                 </div>
                 <Button
                   type='button'
-                  variant='ghost'
+                  variant='destructive'
                   onClick={() => removeFile(index)}
-                  className='absolute top-1 right-1 text-destructive hover:text-destructive/80'
+                  className='absolute top-1 right-1'
                 >
                   <XIcon className='size-4' />
                 </Button>
