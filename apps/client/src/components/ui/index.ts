@@ -5,3 +5,4 @@ export * from "./button";
 export * from "./typography";
 export * from "./searchInput";
 export * from "./sonner";
+export * from "./dialog";
