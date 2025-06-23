@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { Slot } from "@radix-ui/react-slot";
 import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
@@ -108,14 +110,21 @@ const TableCaption = ({ className, ...props }: React.ComponentProps<"div">) => (
 );
 
 export const TableNav = ({ totalPages }: { totalPages: number }) => {
-  const { currentPage, isLoading, setValue } = useDirectoryStore();
+  const { currentPage, currentLimit, isLoading, setValue } = useDirectoryStore();
   const { inputValue, handleChange } = useDebouncedInput({
     value: currentPage,
+    delay: 400,
     onChange: (page) => setValue("currentPage", Math.max(1, Math.min(page, totalPages)))
   });
 
   const isPrevButtonsDisabled = isLoading || currentPage === 1;
   const isNextButtonsDisabled = isLoading || currentPage === totalPages;
+
+  useEffect(() => {
+    if (inputValue > totalPages) {
+      setValue("currentPage", totalPages);
+    }
+  }, [currentLimit]);
 
   return (
     <nav className='flex items-center gap-2'>

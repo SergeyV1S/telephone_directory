@@ -16,7 +16,12 @@ interface IGetTestDataParams {
 
 interface IGetTestDataResponse extends ITestData {}
 
-export const getTestData = async ({ limit, page, searchValue }: IGetTestDataParams) =>
-  api.get<IGetTestDataResponse[]>(
-    `https://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}&_search=${searchValue}`
-  );
+export const getTestData = async ({ limit, page, searchValue }: IGetTestDataParams) => {
+  const params = {
+    _limit: limit,
+    _page: page,
+    ...(searchValue && { _search: searchValue })
+  };
+
+  return api.get<IGetTestDataResponse[]>("https://jsonplaceholder.typicode.com/photos", { params });
+};

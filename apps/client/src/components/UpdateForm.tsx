@@ -78,11 +78,11 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
         onDragOver={handleDragOver}
         onClick={handleClick}
         className={cn(
-          "border-[4px] border-dashed hover:bg-muted py-14 px-24 flex items-center justify-center flex-col cursor-pointer rounded-3xl",
+          "border-3 border-dashed hover:bg-muted py-14 px-24 flex items-center justify-center flex-col gap-2 cursor-pointer rounded-3xl",
           `${isOver ? "border-primary bg-input" : "border-border"}`
         )}
       >
-        <FileIcon className='size-20' />
+        <FileIcon className='size-14' />
         <Typography variant='s_medium' className='text-center'>
           Перетащите json файлы сюда или нажмите для выбора
         </Typography>
