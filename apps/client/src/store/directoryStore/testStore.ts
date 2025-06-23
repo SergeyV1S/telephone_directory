@@ -9,11 +9,12 @@ export const useDirectoryStore = create<TDirectoryStore>((set) => ({
   isLoading: false,
   currentLimit: 10,
   currentPage: 1,
+  searchValue: "",
   setValue: (field, value) => set({ [field]: value }),
-  fetchTestData: async (limit, page) => {
+  fetchTestData: async (limit, page, searchValue) => {
     set({ isLoading: true });
     try {
-      const response = (await getTestData({ limit, page })).data;
+      const response = (await getTestData({ limit, page, searchValue })).data;
       set({ testData: response });
     } catch (e) {
       console.log(e);

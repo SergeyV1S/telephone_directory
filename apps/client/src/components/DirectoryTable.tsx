@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 
 import { FIFTY_RECORDS, ONE_HUNDRED_RECORDS, TEN_RECORDS, TTWENTY_FIVE_RECORDS } from "@/constants";
+import { useDebouncedInput } from "@/hooks";
 import { useDirectoryStore } from "@/store";
 
-import { TableNav } from "./TableNav";
 import {
   SearchInput,
   Select,
@@ -21,13 +21,19 @@ import {
   TableFooter,
   TableHead,
   TableHeader,
+  TableNav,
   TableRow,
   Typography
 } from "./ui";
 
 export const DirectoryTable = () => {
-  const { testData, isLoading, currentLimit, currentPage, fetchTestData, setValue } =
+  const { testData, isLoading, searchValue, currentLimit, currentPage, fetchTestData, setValue } =
     useDirectoryStore();
+
+  const { inputValue, handleChange } = useDebouncedInput({
+    value: searchValue,
+    onChange: (value) => setValue("searchValue", value)
+  });
 
   const dataLength = 5000;
   const startRecord = testData.length > 0 ? testData[0]?.id : currentLimit + 2;
@@ -35,8 +41,9 @@ export const DirectoryTable = () => {
   const totalPages = dataLength / currentLimit;
 
   useEffect(() => {
-    fetchTestData(currentLimit, currentPage);
-  }, [currentLimit, currentPage]);
+    fetchTestData(currentLimit, currentPage, searchValue);
+    console.log(searchValue);
+  }, [currentLimit, currentPage, searchValue]);
 
   return (
     <Table className='mt-5'>
@@ -58,7 +65,12 @@ export const DirectoryTable = () => {
             </SelectContent>
           </Select>
         </div>
-        <SearchInput placeholder='Введите текст' className='max-w-96' />
+        <SearchInput
+          value={inputValue}
+          onChange={handleChange}
+          placeholder='Введите текст'
+          className='max-w-96'
+        />
       </TableCaption>
       <TableContent>
         <TableHeader>

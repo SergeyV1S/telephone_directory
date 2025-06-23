@@ -9,6 +9,8 @@ import { Input } from "./input";
 export const SearchInput = ({ className, ...props }: React.ComponentProps<"input">) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  const handleClick = () => searchInputRef.current?.focus();
+
   return (
     <div
       className={cn(
@@ -19,7 +21,7 @@ export const SearchInput = ({ className, ...props }: React.ComponentProps<"input
     >
       <SearchIcon
         className='size-5 text-input-border group-focus-within:text-bright-blue'
-        onClick={() => searchInputRef.current?.focus()}
+        onClick={handleClick}
       />
       <Input
         ref={searchInputRef}

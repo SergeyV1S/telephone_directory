@@ -11,11 +11,12 @@ export interface ITestData {
 interface IGetTestDataParams {
   limit: number;
   page: number;
+  searchValue: string;
 }
 
 interface IGetTestDataResponse extends ITestData {}
 
-export const getTestData = async ({ limit, page }: IGetTestDataParams) =>
+export const getTestData = async ({ limit, page, searchValue }: IGetTestDataParams) =>
   api.get<IGetTestDataResponse[]>(
-    `https://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}`
+    `https://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}&_search=${searchValue}`
   );
