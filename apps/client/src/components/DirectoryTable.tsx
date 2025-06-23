@@ -42,7 +42,6 @@ export const DirectoryTable = () => {
 
   useEffect(() => {
     fetchTestData(currentLimit, currentPage, searchValue);
-    console.log(searchValue);
   }, [currentLimit, currentPage, searchValue]);
 
   return (
