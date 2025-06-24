@@ -11,7 +11,8 @@ export default {
     isProduction,
     isLocale,
     port: env.PORT || 8080,
-    productionUrl: env.PRODUCTION_URL || `localhost:${env.PORT}`
+    productionUrl: env.PRODUCTION_URL || `localhost:${env.PORT}`,
+    secret: env.SECRET || 'secret'
   },
   cors: {
     origin: ['http://localhost:8000', 'http://127.0.0.1:8000', env.CLIENT_BASE_URL],
@@ -25,21 +26,6 @@ export default {
       password: env.DATABASE_PASSWORD,
       database: env.DATABASE_NAME,
       url: env.DATABASE_URL
-    },
-    redis: {
-      host: env.REDIS_HOST,
-      port: env.REDIS_PORT,
-      password: env.REDIS_PASSWORD
-    }
-  },
-  jwt: {
-    access: {
-      secret: env.JWT_ACCESS_SECRET,
-      expiresIn: env.ACCESS_TOKEN_EXPIRES_IN
-    },
-    refresh: {
-      secret: env.JWT_REFRESH_SECRET,
-      expiresIn: env.REFRESH_TOKEN_EXPIRES_IN
     }
   }
 } as const;

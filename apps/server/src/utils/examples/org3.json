@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1900216,
+    "id_dept": 30000028,
+    "lastname": "Иванов",
+    "firstname": "Иван",
+    "middlename": "Иванович",
+    "phonenumbers": [
+      { "type": "Городской номер", "number": "75-00-00" },
+      { "type": "Газ. номер", "number": "50-000" },
+      { "type": "Городской номер", "number": "75-00-01" },
+      { "type": "Газ. номер", "number": "51-000" }
+    ],
+    "email": "IvanovII@surgut.gazprom.ru",
+    "address": null,
+    "post": "Главный специалист",
+    "organization": "ООО \"Газпром трансгаз Сургут\"",
+    "subdivision": "ООО \"Газпром трансгаз Сургут\" \\ Администрация \\ СИУС"
+  },
+  {
+    "id": 1900217,
+    "id_dept": 30000029,
+    "lastname": "Петрова",
+    "firstname": "Ольга",
+    "middlename": "Сергеевна",
+    "phonenumbers": [
+      { "type": "Городской номер", "number": "76-00-00" },
+      { "type": "Газ. номер", "number": "52-000" }
+    ],
+    "email": "PetrovaOS@surgut.gazprom.ru",
+    "address": null,
+    "post": "Специалист 1 категории",
+    "organization": "ООО \"Газпром трансгаз Сургут\"",
+    "subdivision": "Отдел информационной безопасности"
+  },
+  {
+    "id": 1900218,
+    "id_dept": 30000030,
+    "lastname": "Сидоров",
+    "firstname": "Алексей",
+    "middlename": "Николаевич",
+    "phonenumbers": [{ "type": "Газ. номер", "number": "53-100" }],
+    "email": "SidorovAN@surgut.gazprom.ru",
+    "address": null,
+    "post": "Инженер-программист",
+    "organization": "ООО \"Газпром трансгаз Сургут\"",
+    "subdivision": "ИТ-отдел \\ Разработка"
+  },
+  {
+    "id": 1900219,
+    "id_dept": 30000031,
+    "lastname": "Кузнецова",
+    "firstname": "Мария",
+    "middlename": "Владимировна",
+    "phonenumbers": [
+      { "type": "Городской номер", "number": "77-00-00" },
+      { "type": "Газ. номер", "number": "54-200" }
+    ],
+    "email": "KuznetsovaMV@surgut.gazprom.ru",
+    "address": null,
+    "post": "Юрист",
+    "organization": "ООО \"Газпром трансгаз Сургут\"",
+    "subdivision": "Юридический отдел"
+  },
+  {
+    "id": 1900220,
+    "id_dept": 30000032,
+    "lastname": "Орлов",
+    "firstname": "Дмитрий",
+    "middlename": "Павлович",
+    "phonenumbers": [
+      { "type": "Газ. номер", "number": "55-300" },
+      { "type": "Городской номер", "number": "78-00-00" }
+    ],
+    "email": "OrlovDP@surgut.gazprom.ru",
+    "address": null,
+    "post": "Начальник отдела",
+    "organization": "ООО \"Газпром трансгаз Сургут\"",
+    "subdivision": "Администрация \\ Отдел кадров"
+  }
+]

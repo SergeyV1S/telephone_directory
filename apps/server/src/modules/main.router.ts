@@ -1,11 +1,9 @@
 import { Router } from 'express';
 
-import authRouter from './auth/auth.routes';
-import userRouter from './user/user.routes';
+import phonebookRouter from './phonebook/phonebook.routes';
 
 const router = Router();
 
-router.use('/auth', authRouter);
-router.use('/user', userRouter);
+router.use('/phonebook', phonebookRouter);
 
 export default router;

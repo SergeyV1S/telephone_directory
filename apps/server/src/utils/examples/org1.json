@@ -1,0 +1,72 @@
+[
+  {
+    "ID": "100001",
+    "firstname": "123",
+    "lastname": "123",
+    "middlename": "1231231",
+    "gasPhone": "(725) 10001",
+    "urbanPhone": "(812) 1234567",
+    "email": "ivanov@gazprom.ru",
+    "address": "г. Санкт-Петербург, ул. Энергетиков, д. 5, к. 2, стр. 1",
+    "post": "Инженер 1 категории",
+    "organization": "Газпром Энерго",
+    "subdivision": "Производственный отдел",
+    "subdivisionId": "10010001"
+  },
+  {
+    "ID": "100002",
+    "firstname": "Ольга",
+    "lastname": "Петрова",
+    "middlename": "Сергеевна",
+    "gasPhone": "(725) 10002",
+    "urbanPhone": "(812) 2345678",
+    "email": "petrova@gazprom.ru",
+    "address": "г. Санкт-Петербург, пр. Победы, д. 10, к. 1",
+    "post": "Бухгалтер",
+    "organization": "Финансовый департамент",
+    "subdivision": "Отдел отчетности",
+    "subdivisionId": "10010002"
+  },
+  {
+    "ID": "100003",
+    "firstname": "Сергей",
+    "lastname": "Кузнецов",
+    "middlename": "Алексеевич",
+    "gasPhone": "(725) 10003",
+    "urbanPhone": "(812) 3456789",
+    "email": "kuznetsov@gazprom.ru",
+    "address": "г. Санкт-Петербург, ул. Ленина, д. 15",
+    "post": "Руководитель группы",
+    "organization": "Газпром нефть",
+    "subdivision": "ИТ-отдел",
+    "subdivisionId": "10010003"
+  },
+  {
+    "ID": "100004",
+    "firstname": "Наталья",
+    "lastname": "Сидорова",
+    "middlename": "Викторовна",
+    "gasPhone": "(725) 10004",
+    "urbanPhone": "(812) 4567890",
+    "email": "sidorova@gazprom.ru",
+    "address": "г. Санкт-Петербург, наб. реки Фонтанки, д. 21",
+    "post": "Юрисконсульт",
+    "organization": "Юридический отдел",
+    "subdivision": "Правовая экспертиза",
+    "subdivisionId": "10010004"
+  },
+  {
+    "ID": "100005",
+    "firstname": "Дмитрий",
+    "lastname": "Орлов",
+    "middlename": "Николаевич",
+    "gasPhone": "(725) 10005",
+    "urbanPhone": "(812) 5678901",
+    "email": "orlov@gazprom.ru",
+    "address": "г. Санкт-Петербург, ул. Марата, д. 7, к. 3",
+    "post": "Начальник отдела",
+    "organization": "Управление персоналом",
+    "subdivision": "Отдел кадров",
+    "subdivisionId": "10010005"
+  }
+]

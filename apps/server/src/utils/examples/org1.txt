@@ -1,0 +1,14 @@
+  {
+    "ID": "111111",
+    "firstname": "Тест",
+    "lastname": "Тестов",
+    "middlename": "Тестович",
+    "gasPhone": "(725) 12345",
+    "urbanPhone": "(812) 5112211",
+    "email": "Testov@ttt.gazprom.ru",
+    "address": "г. Санкт-Петербург, ул. такая-то, д. 1, к. 1, стр. 1",
+    "post": "Главный специалист",
+    "organization": "Подразделения при администрации",
+    "subdivision": "Отдел администрирования",
+    "subdivisionId": "10017777"
+  }, 

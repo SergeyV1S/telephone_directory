@@ -1,0 +1,52 @@
+[
+  {
+    "employeeId": "200001",
+    "name": "Иванов Иван Иванович",
+    "gasPhone": "(771) 20-001",
+    "email": "ivanov@surgut-inform.gazprom.ru",
+    "post": "Ведущий специалист",
+    "organization": "Филиал «ООО Газпром информ» в г. Сургут",
+    "subdivision": "Отдел автоматизации",
+    "subdivisionId": "201"
+  },
+  {
+    "employeeId": "200002",
+    "name": "Петрова Ольга Сергеевна",
+    "gasPhone": "(771) 20-002",
+    "email": "petrova@surgut-inform.gazprom.ru",
+    "post": "Специалист 1 категории",
+    "organization": "Филиал «ООО Газпром информ» в г. Сургут",
+    "subdivision": "Отдел ИТ-поддержки",
+    "subdivisionId": "202"
+  },
+  {
+    "employeeId": "200003",
+    "name": "Сидоров Алексей Николаевич",
+    "gasPhone": "(771) 20-003",
+    "email": "sidorov@surgut-inform.gazprom.ru",
+    "post": "Главный инженер",
+    "organization": "Филиал «ООО Газпром информ» в г. Сургут",
+    "subdivision": "Инженерный отдел",
+    "subdivisionId": "203"
+  },
+  {
+    "employeeId": "200004",
+    "name": "Кузнецова Мария Владимировна",
+    "gasPhone": "(771) 20-004",
+    "email": "kuznetsova@surgut-inform.gazprom.ru",
+    "post": "Юрист",
+    "organization": "Филиал «ООО Газпром информ» в г. Сургут",
+    "subdivision": "Юридический отдел",
+    "subdivisionId": "204"
+  },
+  {
+    "employeeId": "200005",
+    "name": "Орлов Дмитрий Павлович",
+    "gasPhone": "(771) 20-005",
+    "email": "orlov@surgut-inform.gazprom.ru",
+    "post": "Начальник отдела",
+    "organization": "Филиал «ООО Газпром информ» в г. Сургут",
+    "subdivision": "Отдел X",
+    "subdivisionId": "111"
+  }
+]

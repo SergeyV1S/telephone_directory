@@ -1,0 +1,11 @@
+{
+        "employeeId":  "1111111",
+        "name":  "Иванов Иван Иванович",
+        "gasPhone":  "(771) 11-111",
+        "email":  "I.Ivanov@surgut-inform.gazprom.ru",
+        "post":  "Ведущий специалист",
+        "organization":  "Филиал «ООО Газпром инофрм» в г.Сургут",
+        "subdivision":  "Отдел X",
+        "subdivisionId":  "111"
+    }
+

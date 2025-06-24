@@ -1,238 +1,148 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "ITUgra OpenAPI docs",
+    "description": "Phonebook API",
     "version": "1.0.0",
-    "title": "ITUgra"
+    "title": "Phonebook"
   },
   "host": "localhost:8000",
   "basePath": "/api",
   "tags": [
     {
-      "name": "Auth",
-      "description": "Authentication related endpoints"
-    },
-    {
-      "name": "User",
-      "description": "User related endpoints"
+      "name": "Phonebook",
+      "description": "Phonebook related endpoints"
     }
   ],
   "schemes": ["http"],
   "paths": {
-    "/auth/register": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "Register a new user",
-        "description": "Creates a new user and returns authentication tokens.",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "user",
-            "description": "User registration data",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateUserDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User registered successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "number"
-                },
-                "message": {
-                  "$ref": "#/definitions/LoginRegistrationResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/login": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "Log in an existing user",
-        "description": "Authenticates a user and returns authentication tokens.",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "user",
-            "description": "User login data",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoginUserDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User logged in successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "number"
-                },
-                "message": {
-                  "$ref": "#/definitions/LoginRegistrationResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/logout": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "Log out the current user",
-        "description": "Logs out the user and clears authentication tokens.",
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User logged out successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "statusCode": {
-                  "type": "number"
-                },
-                "message": {
-                  "type": "null"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Something went wrong"
-          }
-        }
-      }
-    },
-    "/user/profile": {
+    "/phonebook": {
       "get": {
-        "tags": ["User"],
-        "summary": "Get user profile",
-        "description": "Retrieves the profile information of the authenticated user.",
-        "security": [
+        "tags": ["Phonebook"],
+        "summary": "Get phonebook records",
+        "description": "Retrieves phonebook records with fuzzy search and grouping",
+        "parameters": [
           {
-            "api_key": []
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": ["firstname", "lastname", "middlename", "post", "organisation", "subdivision"]
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": ["ASC", "DESC"]
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "User profile retrieved successfully",
+            "description": "Phonebook records fetched successfully",
             "schema": {
               "type": "object",
               "properties": {
-                "statusCode": {
-                  "type": "number"
+                "records": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/PhonebookRecord"
+                  }
                 },
-                "message": {
-                  "$ref": "#/definitions/CreateUserDto"
+                "totalRecords": {
+                  "type": "integer"
                 }
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
+          "400": {
+            "description": "Bad request"
           }
         }
       }
-    }
-  },
-  "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
+    },
+    "/phonebook/update": {
+      "post": {
+        "tags": ["Phonebook"],
+        "summary": "Upload phonebook records",
+        "description": "Uploads and replaces phonebook records by organization. Requires a secret token in the Authorization header.",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Secret token to authorize upload",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Array of JSON files containing phonebook data in one of three supported formats",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Records uploaded successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or missing file"
+          },
+          "403": {
+            "description": "Forbidden – Invalid or missing Authorization token"
+          },
+          "415": {
+            "description": "Unsupported media type – Invalid JSON format or structure"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "LoginRegistrationResponse": {
+    "PhonebookRecord": {
       "type": "object",
       "properties": {
-        "role": {
-          "type": "string"
-        }
-      }
-    },
-    "CreateUserDto": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string"
-        },
-        "secondName": {
-          "type": "string"
-        },
-        "mail": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "role": {
-          "type": "string",
-          "enum": ["org", "user"]
-        },
-        "password": {
-          "type": "string"
-        }
-      },
-      "required": ["fullName", "mail", "role", "birthDate", "password"]
-    },
-    "LoginUserDto": {
-      "type": "object",
-      "properties": {
-        "mail": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        }
-      },
-      "required": ["password"]
-    },
-    "GetUserProfileResponse": {
-      "type": "object",
-      "properties": {
-        "uid": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "secondName": {
-          "type": "string"
-        },
-        "mail": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "birthDate": {
-          "type": "string"
-        },
-        "role": {
-          "type": "string"
-        }
+        "id": { "type": "string" },
+        "firstname": { "type": "string" },
+        "lastname": { "type": "string" },
+        "middlename": { "type": "string" },
+        "gasPhone": { "type": "string" },
+        "urbanPhone": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "post": { "type": "string" },
+        "organization": { "type": "string" },
+        "subdivision": { "type": "string" }
       }
     }
   }
