@@ -22,8 +22,8 @@ services:
           memory: 1024M
   express-app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../..
+      dockerfile: apps/server/Dockerfile
     depends_on:
       db:
         condition: service_healthy
