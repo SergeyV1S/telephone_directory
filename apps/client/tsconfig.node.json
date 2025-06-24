@@ -5,7 +5,6 @@
     "target": "ES2022",
     "lib": ["ES2023"],
 
-    /* Bundler mode */
     "verbatimModuleSyntax": true
   },
   "include": ["vite.config.ts"]
