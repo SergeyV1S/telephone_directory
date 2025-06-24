@@ -1,21 +1,30 @@
 import { create } from "zustand";
 
-import { getTestData } from "@/api/test/getTestData";
+import { getPhonebookRecords } from "@/api";
 
 import type { TDirectoryStore } from "./types";
 
 export const useDirectoryStore = create<TDirectoryStore>((set) => ({
-  testData: [],
+  records: [],
   isLoading: false,
   currentLimit: 10,
   currentPage: 1,
-  searchValue: "",
+  query: "",
+  totalRecords: 1,
   setValue: (field, value) => set({ [field]: value }),
-  fetchTestData: async (limit, page, searchValue) => {
+  fetchTestData: async (limit, page, query) => {
     set({ isLoading: true });
     try {
-      const response = (await getTestData({ limit, page, searchValue })).data;
-      set({ testData: response });
+      const { records, totalRecords } = (
+        await getPhonebookRecords({
+          limit: limit.toString(),
+          page: page.toString(),
+          query,
+          groupBy: "firstname",
+          orderBy: "ASC"
+        })
+      ).data.message;
+      set({ records, totalRecords });
     } catch (e) {
       console.log(e);
     } finally {

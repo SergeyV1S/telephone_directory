@@ -3,7 +3,7 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { FileIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 
-import { postUpdateData } from "@/api/update/postUpdateData";
+import { postUploadPhonebookRecords } from "@/api";
 import { cn } from "@/helpers";
 
 import { Button, Input, Typography } from "./ui";
@@ -13,7 +13,10 @@ interface IUpdateFormProps {
 }
 
 export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
-  const [updatedData, updateDataAction, isPending] = useActionState(postUpdateData, undefined);
+  const [updatedData, updateDataAction, isPending] = useActionState(
+    postUploadPhonebookRecords,
+    undefined
+  );
   const [isOver, setIsOver] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
@@ -56,7 +59,7 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
   const handleClick = () => fileInputRef.current?.click();
 
   useEffect(() => {
-    if (updatedData?.success) {
+    if (updatedData?.status === 200) {
       toast.success("Данные успешно обновлены!");
       closeDialog();
     }

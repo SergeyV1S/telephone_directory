@@ -27,22 +27,29 @@ import {
 } from "./ui";
 
 export const DirectoryTable = () => {
-  const { testData, isLoading, searchValue, currentLimit, currentPage, fetchTestData, setValue } =
-    useDirectoryStore();
+  const {
+    records,
+    totalRecords,
+    isLoading,
+    query,
+    currentLimit,
+    currentPage,
+    fetchTestData,
+    setValue
+  } = useDirectoryStore();
 
   const { inputValue, handleChange } = useDebouncedInput({
-    value: searchValue,
-    onChange: (value) => setValue("searchValue", value)
+    value: query,
+    onChange: (value) => setValue("query", value)
   });
 
-  const dataLength = 5000;
-  const startRecord = testData.length > 0 ? testData[0]?.id : currentLimit + 2;
-  const endRecord = testData[testData.length - 1]?.id;
-  const totalPages = dataLength / currentLimit;
+  const startRecord = records.length > 0 ? records[0]?.id : 0;
+  const endRecord = records[records.length - 1]?.id;
+  const totalPages = totalRecords === 0 ? totalRecords / currentLimit : 1;
 
   useEffect(() => {
-    fetchTestData(currentLimit, currentPage, searchValue);
-  }, [currentLimit, currentPage, searchValue]);
+    fetchTestData(currentLimit, currentPage, query);
+  }, [currentLimit, currentPage, query]);
 
   return (
     <Table className='mt-5'>
@@ -91,16 +98,19 @@ export const DirectoryTable = () => {
               color='var(--color-corporate)'
             />
           ) : (
-            testData.map((element) => (
-              <TableRow key={element.id}>
-                <TableCell>{element.id}</TableCell>
-                <TableCell>Яцук Сергей Николаевич</TableCell>
-                <TableCell>+79451386424</TableCell>
-                <TableCell>Frontend Developer</TableCell>
-                <TableCell>ул. Пушкина дом Колотушкина</TableCell>
-                <TableCell>Igniz</TableCell>
-                <TableCell>Igniz Developer</TableCell>
-                <TableCell>serg@yandex.ru</TableCell>
+            records.map((record) => (
+              <TableRow key={record.id}>
+                <TableCell>{record.id}</TableCell>
+                <TableCell>{`${record.firstname} ${record.lastname} ${record.middlename}`}</TableCell>
+                <TableCell className='flex flex-col'>
+                  <span>Газ. тел.: {record.gasPhone}</span>
+                  <span>Гор. тел.: {record.urbanPhone}</span>
+                </TableCell>
+                <TableCell>{record.post}</TableCell>
+                <TableCell>{record.address}</TableCell>
+                <TableCell>{record.organization}</TableCell>
+                <TableCell>{record.subdivision}</TableCell>
+                <TableCell>{record.email}</TableCell>
               </TableRow>
             ))
           )}
@@ -108,7 +118,7 @@ export const DirectoryTable = () => {
       </TableContent>
       <TableFooter>
         <Typography>
-          Показано с {startRecord} по {endRecord} из {dataLength} записей
+          Показано с {startRecord} по {endRecord} из {totalRecords} записей
         </Typography>
         <TableNav totalPages={totalPages} />
       </TableFooter>
