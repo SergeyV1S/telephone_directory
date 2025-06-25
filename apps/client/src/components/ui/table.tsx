@@ -13,7 +13,7 @@ const Table = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     data-slot='table-container'
     className={cn(
-      "relative flex flex-col size-full max-h-[950px] space-y-5 bg-white rounded-sm p-4 shadow-table",
+      "relative flex flex-col size-full space-y-5 bg-white rounded-sm p-4 shadow-table",
       className
     )}
     {...props}

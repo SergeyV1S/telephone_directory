@@ -9,10 +9,9 @@ export const useDirectoryStore = create<TDirectoryStore>((set) => ({
   isLoading: false,
   currentLimit: 10,
   currentPage: 1,
-  query: "",
   totalRecords: 1,
   setValue: (field, value) => set({ [field]: value }),
-  fetchRecords: async (limit, page, query) => {
+  fetchRecords: async (limit, page, query, orderBy) => {
     set({ isLoading: true });
     try {
       const { records, totalRecords } = (
@@ -21,7 +20,7 @@ export const useDirectoryStore = create<TDirectoryStore>((set) => ({
           page: page.toString(),
           query,
           groupBy: "firstname",
-          orderBy: "ASC"
+          orderBy
         })
       ).data.message;
       set({ records, totalRecords });

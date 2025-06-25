@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import type { TOrderBy } from "@repo/types";
+import { ArrowDownAZIcon } from "lucide-react";
 import { BeatLoader } from "react-spinners";
 
 import { FIFTY_RECORDS, ONE_HUNDRED_RECORDS, TEN_RECORDS, TTWENTY_FIVE_RECORDS } from "@/constants";
@@ -7,6 +9,12 @@ import { useDebouncedInput } from "@/hooks";
 import { useDirectoryStore } from "@/store";
 
 import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
   SearchInput,
   Select,
   SelectContent,
@@ -32,6 +40,7 @@ export const DirectoryTable = () => {
     totalRecords,
     isLoading,
     query,
+    orderBy,
     currentLimit,
     currentPage,
     fetchRecords,
@@ -48,8 +57,8 @@ export const DirectoryTable = () => {
   const totalPages = totalRecords !== 0 ? Math.ceil(totalRecords! / currentLimit) : 1;
 
   useEffect(() => {
-    fetchRecords(currentLimit, currentPage, query);
-  }, [currentLimit, currentPage, query]);
+    fetchRecords(currentLimit, currentPage, query, orderBy);
+  }, [currentLimit, currentPage, query, orderBy]);
 
   return (
     <Table className='mt-5'>
@@ -71,12 +80,31 @@ export const DirectoryTable = () => {
             </SelectContent>
           </Select>
         </div>
-        <SearchInput
-          value={inputValue}
-          onChange={handleChange}
-          placeholder='Введите текст'
-          className='max-w-96'
-        />
+        <div className='flex items-center gap-4'>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='ghost' size='icon'>
+                <ArrowDownAZIcon className='size-6' />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className='w-56'>
+              <DropdownMenuRadioGroup
+                value={orderBy}
+                onValueChange={(newOrderBy) => setValue("orderBy", newOrderBy as TOrderBy)}
+              >
+                <DropdownMenuRadioItem value='ASC'>По возрастанию</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value='DESC'>По убыванию</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <SearchInput
+            value={inputValue}
+            onChange={handleChange}
+            placeholder='Введите текст'
+            className='max-w-96'
+          />
+        </div>
       </TableCaption>
       <TableContent>
         <TableHeader>

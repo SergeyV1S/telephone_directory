@@ -6,3 +6,4 @@ export * from "./typography";
 export * from "./searchInput";
 export * from "./sonner";
 export * from "./dialog";
+export * from "./dropdown-menu";
