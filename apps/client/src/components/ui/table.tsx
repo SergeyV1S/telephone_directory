@@ -75,7 +75,7 @@ const TableHead = ({
       data-slot='table-head'
       {...(!asChild && { tag: "h2", variant: "s_medium" })}
       className={cn(
-        "bg-base-dark-3 border-b flex items-center h-10 px-4 py-6 last:pl-8",
+        "bg-base-dark-3 border-b flex items-center h-10 px-2 py-6 last:pl-8",
         className
       )}
       {...props}
@@ -95,7 +95,7 @@ const TableCell = ({
   return (
     <Comp
       data-slot='table-cell'
-      className={cn("px-4 py-3 align-middle border-b last:pl-8", className)}
+      className={cn("px-2 py-3 align-middle border-b last:pl-8", className)}
       {...props}
     />
   );

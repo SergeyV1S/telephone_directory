@@ -43,9 +43,9 @@ export const DirectoryTable = () => {
     onChange: (value) => setValue("query", value)
   });
 
-  const startRecord = records.length > 0 ? records[0]?.id : 0;
-  const endRecord = records[records.length - 1]?.id;
-  const totalPages = totalRecords === 0 ? totalRecords / currentLimit : 1;
+  const startRecord = records.length > 0 ? currentLimit * currentPage - currentLimit + 1 : 0;
+  const endRecord = Math.min(currentLimit * currentPage, totalRecords || 1);
+  const totalPages = totalRecords !== 0 ? Math.ceil(totalRecords! / currentLimit) : 1;
 
   useEffect(() => {
     fetchRecords(currentLimit, currentPage, query);
@@ -100,7 +100,7 @@ export const DirectoryTable = () => {
           ) : (
             records.map((record) => (
               <TableRow key={record.id}>
-                <TableCell>{record.id}</TableCell>
+                <TableCell className={`${record.id.length >= 6 && "pl-0"} `}>{record.id}</TableCell>
                 <TableCell>{`${record.firstname} ${record.lastname} ${record.middlename}`}</TableCell>
                 <TableCell className='flex flex-col'>
                   <span>Газ. тел.: {record.gasPhone}</span>

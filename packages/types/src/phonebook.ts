@@ -5,8 +5,8 @@ import { IPhoneNumber } from "./phone-number";
 export interface IGetPhonebookRecordRequest {
   limit: string;
   page: string;
-  groupBy: TGroupBy;
-  orderBy: TOrderBy;
+  groupBy?: TGroupBy;
+  orderBy?: TOrderBy;
   query?: string;
 }
 
