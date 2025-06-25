@@ -12,7 +12,7 @@ export const useDirectoryStore = create<TDirectoryStore>((set) => ({
   query: "",
   totalRecords: 1,
   setValue: (field, value) => set({ [field]: value }),
-  fetchTestData: async (limit, page, query) => {
+  fetchRecords: async (limit, page, query) => {
     set({ isLoading: true });
     try {
       const { records, totalRecords } = (

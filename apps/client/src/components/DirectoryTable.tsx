@@ -34,7 +34,7 @@ export const DirectoryTable = () => {
     query,
     currentLimit,
     currentPage,
-    fetchTestData,
+    fetchRecords,
     setValue
   } = useDirectoryStore();
 
@@ -48,7 +48,7 @@ export const DirectoryTable = () => {
   const totalPages = totalRecords === 0 ? totalRecords / currentLimit : 1;
 
   useEffect(() => {
-    fetchTestData(currentLimit, currentPage, query);
+    fetchRecords(currentLimit, currentPage, query);
   }, [currentLimit, currentPage, query]);
 
   return (

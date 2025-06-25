@@ -1,13 +1,21 @@
 import { api } from "../instance";
 
-export interface IPostUpdateDataResponse {
+interface IPostUpdateDataResponse {
   success: boolean;
 }
 
-export const postUploadPhonebookRecords = async (prevState: unknown, formData: FormData) =>
-  api.post("/update", formData.get("files"), {
+interface IPostUploadPhonebookRecordsParams {
+  password: string;
+  formData: FormData;
+}
+
+export const postUploadPhonebookRecords = async ({
+  password,
+  formData
+}: IPostUploadPhonebookRecordsParams) =>
+  api.post<IResponse<IPostUpdateDataResponse>>("/update", formData, {
     headers: {
-      Authorization: `Bearer ${formData.get("password")}`,
+      Authorization: password,
       "Content-Type": "multipart/form-data"
     }
   });

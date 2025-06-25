@@ -1,24 +1,15 @@
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { FileIcon, XIcon } from "lucide-react";
-import { toast } from "sonner";
 
-import { postUploadPhonebookRecords } from "@/api";
 import { cn } from "@/helpers";
+import { useUploadStore } from "@/store";
 
 import { Button, Input, Typography } from "./ui";
 
-interface IUpdateFormProps {
-  closeDialog: () => void;
-}
-
-export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
-  const [updatedData, updateDataAction, isPending] = useActionState(
-    postUploadPhonebookRecords,
-    undefined
-  );
+export const UpdateForm = () => {
+  const { isLoading, uploadedFiles, setValue, uploadPhonebook } = useUploadStore();
   const [isOver, setIsOver] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -26,7 +17,8 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
     const jsonFiles = newFiles.filter(
       (file) => file.type === "application/json" || file.name.endsWith(".json")
     );
-    setUploadedFiles((prev) => [...prev, ...jsonFiles]);
+    const newUploadedFiles = uploadedFiles.concat(jsonFiles);
+    setValue("uploadedFiles", newUploadedFiles);
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -53,20 +45,15 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
     }
   };
 
-  const removeFile = (fileIndex: number) =>
-    setUploadedFiles((prev) => prev.filter((_, index) => index !== fileIndex));
+  const removeFile = (fileIndex: number) => {
+    const newUploadedFiles = uploadedFiles.filter((_, index) => index !== fileIndex);
+    setValue("uploadedFiles", newUploadedFiles);
+  };
 
   const handleClick = () => fileInputRef.current?.click();
 
-  useEffect(() => {
-    if (updatedData?.status === 200) {
-      toast.success("Данные успешно обновлены!");
-      closeDialog();
-    }
-  }, [updatedData]);
-
   return (
-    <form action={updateDataAction} className='space-y-8 flex flex-col'>
+    <form action={uploadPhonebook} className='space-y-8 flex flex-col'>
       <Input
         name='password'
         autoComplete='off'
@@ -126,7 +113,7 @@ export const UpdateForm = ({ closeDialog }: IUpdateFormProps) => {
         </div>
       )}
 
-      <Button type='submit' size='lg' disabled={isPending || uploadedFiles.length === 0}>
+      <Button type='submit' size='lg' disabled={isLoading || uploadedFiles.length === 0}>
         Отправить
       </Button>
     </form>
