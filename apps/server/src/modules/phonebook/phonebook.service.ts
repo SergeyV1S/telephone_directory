@@ -102,7 +102,7 @@ export const uploadRecords = async (data: TUploadFormat[]): Promise<boolean> => 
 export const getRecords = async (
   limit: number,
   page: number,
-  groupBy: TGroupBy = 'organisation',
+  groupBy: TGroupBy = 'lastname',
   orderBy: TOrderBy = 'ASC',
   query?: string
 ): Promise<IGetPhonebookRecordsResponse> => {

@@ -36,14 +36,14 @@
           {
             "name": "groupBy",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": ["firstname", "lastname", "middlename", "post", "organisation", "subdivision"]
           },
           {
             "name": "orderBy",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": ["ASC", "DESC"]
           },
