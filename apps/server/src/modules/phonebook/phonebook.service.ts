@@ -136,7 +136,10 @@ export const getRecords = async (
       .offset((page - 1) * limit)
       .orderBy(orderBy === 'ASC' ? asc(phonebookRecord[groupBy]) : desc(phonebookRecord[groupBy]));
 
-    const [totalRecords] = await db.select({ count: count() }).from(phonebookRecord);
+    const [totalRecords] = await db
+      .select({ count: count() })
+      .from(phonebookRecord)
+      .where(fuzzyCondition ?? undefined);
 
     return {
       records: result as IGetPhonebookRecords[],
