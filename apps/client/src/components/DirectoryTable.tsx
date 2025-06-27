@@ -15,6 +15,9 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
   SearchInput,
   Select,
   SelectContent,
@@ -27,12 +30,12 @@ import {
   TableCell,
   TableContent,
   TableFooter,
-  TableHead,
   TableHeader,
   TableNav,
   TableRow,
   Typography
 } from "./ui";
+import { GroupFilter } from "./ui/GroupFilter";
 
 export const DirectoryTable = () => {
   const {
@@ -41,6 +44,7 @@ export const DirectoryTable = () => {
     isLoading,
     query,
     orderBy,
+    groupBy,
     currentLimit,
     currentPage,
     fetchRecords,
@@ -57,8 +61,8 @@ export const DirectoryTable = () => {
   const totalPages = totalRecords !== 0 ? Math.ceil(totalRecords! / currentLimit) : 1;
 
   useEffect(() => {
-    fetchRecords(currentLimit, currentPage, query, orderBy);
-  }, [currentLimit, currentPage, query, orderBy]);
+    fetchRecords(currentLimit, currentPage, query, orderBy, groupBy);
+  }, [currentLimit, currentPage, query, orderBy, groupBy]);
 
   return (
     <Table className='mt-5'>
@@ -82,11 +86,20 @@ export const DirectoryTable = () => {
         </div>
         <div className='flex items-center gap-4'>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='ghost' size='icon'>
-                <ArrowDownAZIcon className='size-6' />
-              </Button>
-            </DropdownMenuTrigger>
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <DropdownMenuTrigger asChild>
+                  <Button variant='ghost' size='icon'>
+                    <ArrowDownAZIcon className='size-6' />
+                  </Button>
+                </DropdownMenuTrigger>
+              </HoverCardTrigger>
+              <HoverCardContent>
+                <Typography variant='xxs_medium' className='text-white'>
+                  Упорядочить
+                </Typography>
+              </HoverCardContent>
+            </HoverCard>
             <DropdownMenuContent className='w-56'>
               <DropdownMenuRadioGroup
                 value={orderBy}
@@ -109,14 +122,14 @@ export const DirectoryTable = () => {
       <TableContent>
         <TableHeader>
           <TableRow>
-            <TableHead>#</TableHead>
-            <TableHead>ФИО</TableHead>
-            <TableHead>Телефон</TableHead>
-            <TableHead>Должность</TableHead>
-            <TableHead>Адрес</TableHead>
-            <TableHead>Организация</TableHead>
-            <TableHead>Подразделение</TableHead>
-            <TableHead>Email</TableHead>
+            <GroupFilter columnName='#' />
+            <GroupFilter columnName='ФИО' composeFilter={["firstname", "lastname", "middlename"]} />
+            <GroupFilter columnName='Телефон' />
+            <GroupFilter columnName='Должность' columnFilterName='post' />
+            <GroupFilter columnName='Адрес' />
+            <GroupFilter columnName='Организация' columnFilterName='organisation' />
+            <GroupFilter columnName='Подразделение' columnFilterName='subdivision' />
+            <GroupFilter columnName='Email' />
           </TableRow>
         </TableHeader>
         <TableBody>
