@@ -53,7 +53,10 @@ export const DirectoryTable = () => {
 
   const { inputValue, handleChange } = useDebouncedInput({
     value: query,
-    onChange: (value) => setValue("query", value)
+    onChange: (value) => {
+      setValue("query", value);
+      setValue("currentPage", 1);
+    }
   });
 
   const startRecord = records.length > 0 ? currentLimit * currentPage - currentLimit + 1 : 0;
