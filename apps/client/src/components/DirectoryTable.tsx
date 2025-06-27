@@ -8,6 +8,7 @@ import { FIFTY_RECORDS, ONE_HUNDRED_RECORDS, TEN_RECORDS, TTWENTY_FIVE_RECORDS }
 import { useDebouncedInput } from "@/hooks";
 import { useDirectoryStore } from "@/store";
 
+import { GroupFilter } from "./GroupFilter";
 import {
   Button,
   DropdownMenu,
@@ -35,7 +36,6 @@ import {
   TableRow,
   Typography
 } from "./ui";
-import { GroupFilter } from "./ui/GroupFilter";
 
 export const DirectoryTable = () => {
   const {

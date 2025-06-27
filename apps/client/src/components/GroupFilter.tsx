@@ -9,9 +9,9 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger
-} from "./dropdown-menu";
-import { TableHead } from "./table";
-import { Typography } from "./typography";
+} from "./ui/dropdown-menu";
+import { TableHead } from "./ui/table";
+import { Typography } from "./ui/typography";
 
 interface IGroupFilter {
   columnFilterName?: TGroupBy;

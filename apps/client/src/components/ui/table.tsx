@@ -13,7 +13,7 @@ const Table = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     data-slot='table-container'
     className={cn(
-      "relative flex flex-col size-full space-y-5 bg-white rounded-sm p-4 shadow-table",
+      "relative flex flex-col size-full space-y-5 bg-white min-h-[calc(100vh-120px)] rounded-sm p-4 shadow-table",
       className
     )}
     {...props}
@@ -37,7 +37,7 @@ const TableContent = ({ className, ...props }: React.ComponentProps<"div">) => (
 );
 
 const TableBody = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div data-slot='table-body' className={cn("w-full", className)} {...props}>
+  <div data-slot='table-body' className={cn("w-full ", className)} {...props}>
     <div className=''>{props.children}</div>
   </div>
 );
@@ -77,7 +77,7 @@ const TableHead = ({
       data-slot='table-head'
       {...(!asChild && { variant: "ghost" })}
       className={cn(
-        "bg-base-dark-3 border-b rounded-none hover:rounded-lg transition-rounded duration-300 flex items-center justify-start h-10 py-6 px-2 last:pl-8",
+        "bg-base-dark-3 border-b rounded-none hover:rounded-lg transition-rounded duration-300 flex items-center justify-start gap-1 h-10 py-6 px-2 last:pl-8",
         typographyVariants({ variant: "s_medium" }),
         isActive && "text-corporate",
         className
