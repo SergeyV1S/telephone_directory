@@ -12,6 +12,7 @@ WORKDIR /app
 
 COPY . .
 
+RUN npm install
 RUN turbo prune --scope=client --docker
 
 FROM base AS installer
