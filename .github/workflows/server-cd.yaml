@@ -2,11 +2,11 @@ name: server-cd
 
 env:
   APPNAME: telephone_directory
-  API_PORT: ${{ secrets.PORT }}
+  API_PORT: ${{ secrets.API_PORT }}
   NODE_ENV: prod
   LOCALE: false
   PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
-  SECRET: ${{ secrets.APP_SECRET }}
+  SECRET: ${{ secrets.SECRET }}
   CLIENT_BASE_URL: ${{ secrets.CLIENT_BASE_URL }}
   DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
   DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
@@ -71,10 +71,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install SSH keys
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.REMOTE_HOST }} > ~/.ssh/known_hosts
 
       - name: Copy docker-compose file
         run: scp -o StrictHostKeyChecking=no ./docker-compose.prod.yaml ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PATH_TO_PROJECT }}/docker-compose.yml
