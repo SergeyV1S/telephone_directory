@@ -48,9 +48,6 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.REMOTE_HOST }} > ~/.ssh/known_hosts
 
-      - name: Debug SSH connection
-        run: ssh -vvv ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
-
       - name: Deploy Docker Container
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
