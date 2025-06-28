@@ -77,7 +77,10 @@ jobs:
           ssh-keyscan -H ${{ secrets.REMOTE_HOST }} > ~/.ssh/known_hosts
 
       - name: Copy docker-compose file
-        run: scp -o StrictHostKeyChecking=no ./apps/server/docker-compose.prod.yaml ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PATH_TO_PROJECT }}/docker-compose.yml
+        run: |
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
+          ./apps/server/docker-compose.prod.yaml \
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PATH_TO_PROJECT }}/docker-compose.yml
 
       - name: Deploy to production
         run: |
