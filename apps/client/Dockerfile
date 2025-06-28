@@ -5,7 +5,6 @@ RUN apk update && apk add --no-cache libc6-compat bash
 FROM base AS turbo-setup
 WORKDIR /app
 
-COPY turbo.json package.json package-lock.json ./
 RUN npm install -g turbo@^2
 
 FROM turbo-setup AS builder
@@ -29,7 +28,7 @@ RUN npm run build --prefix apps/client
 
 FROM nginx:stable-alpine AS production
 COPY --from=installer /app/apps/client/dist /usr/share/nginx/html
-COPY ./apps/client/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=installer /app/apps/client/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
