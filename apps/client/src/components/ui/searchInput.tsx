@@ -14,7 +14,7 @@ export const SearchInput = ({ className, ...props }: React.ComponentProps<"input
   return (
     <div
       className={cn(
-        "group flex items-center border border-input-border rounded-sm px-3 cursor-text",
+        "group flex items-center border border-input-border rounded-sm px-3 cursor-text max-sm:pr-0 max-sm:pl-2",
         "focus-within:border-bright-blue focus-within:ring-bright-blue-light focus-within:ring-2 transition-all duration-200",
         className
       )}

@@ -1,6 +1,7 @@
 import type { TGroupBy } from "@repo/types";
 import { ArrowDownUp } from "lucide-react";
 
+import { translateFio } from "@/helpers";
 import { useDirectoryStore } from "@/store";
 
 import {
@@ -32,7 +33,11 @@ export const GroupFilter = ({ columnName, columnFilterName, composeFilter }: IGr
 
   if (columnFilterName) {
     return (
-      <TableHead isActive={groupBy === columnFilterName} onClick={handleOnButtonClick}>
+      <TableHead
+        className='hover:rounded-md'
+        isActive={groupBy === columnFilterName}
+        onClick={handleOnButtonClick}
+      >
         <span>{columnName}</span>
         <ArrowDownUp />
       </TableHead>
@@ -52,6 +57,7 @@ export const GroupFilter = ({ columnName, columnFilterName, composeFilter }: IGr
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <TableHead
+            className='hover:rounded-md'
             isActive={composeFilter.includes(groupBy || "post")}
             onClick={handleOnButtonClick}
           >
@@ -63,7 +69,7 @@ export const GroupFilter = ({ columnName, columnFilterName, composeFilter }: IGr
           <DropdownMenuRadioGroup value={groupBy} onValueChange={handleOnValueChange}>
             {composeFilter.map((item) => (
               <DropdownMenuRadioItem defaultChecked={item === groupBy} value={item}>
-                {item}
+                {translateFio(item)}
               </DropdownMenuRadioItem>
             ))}
           </DropdownMenuRadioGroup>
