@@ -20,6 +20,7 @@ RUN npm install -g turbo
 
 COPY . .
 
+RUN npm install
 RUN turbo prune --scope=server --docker
 
 FROM turbo-builder AS installer

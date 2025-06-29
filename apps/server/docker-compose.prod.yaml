@@ -18,7 +18,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
+          cpus: '0.5'
           memory: 1024M
     networks:
       - app-network
@@ -29,12 +29,12 @@ services:
       db:
         condition: service_healthy
     ports:
-      - '8000:8000'
+      - '${API_PORT}:${API_PORT}'
     environment:
       APPNAME: ${APPNAME}
-      PORT: ${PORT}
-      NODE_ENV: prod
-      LOCALE: true
+      PORT: ${API_PORT}
+      NODE_ENV: ${NODE_ENV}
+      LOCALE: ${LOCALE}
       PRODUCTION_URL: ${PRODUCTION_URL}
       SECRET: ${SECRET}
       CLIENT_BASE_URL: ${CLIENT_BASE_URL}
@@ -48,7 +48,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '3'
+          cpus: '0.5'
           memory: 2048M
     networks:
       - app-network
