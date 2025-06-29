@@ -17,12 +17,12 @@ env:
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed]
   workflow_dispatch:
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && github.event.action == 'closed'
     name: Build and Push Docker Image
     timeout-minutes: 30
     runs-on: ubuntu-latest
