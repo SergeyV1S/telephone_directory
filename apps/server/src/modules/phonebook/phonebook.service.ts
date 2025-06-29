@@ -109,9 +109,9 @@ export const getRecords = async (
   try {
     const fuzzyCondition = query
       ? sql`
-        similarity(${phonebookRecord.firstname}, ${query}) > 0.3 OR
-        similarity(${phonebookRecord.lastname}, ${query}) > 0.3 OR
-        similarity(${phonebookRecord.middlename}, ${query}) > 0.3
+        similarity(${phonebookRecord.firstname}, ${query}) > 0.1 OR
+        similarity(${phonebookRecord.lastname}, ${query}) > 0.1 OR
+        similarity(${phonebookRecord.middlename}, ${query}) > 0.1
       `
       : undefined;
 
