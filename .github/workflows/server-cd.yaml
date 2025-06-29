@@ -88,7 +88,7 @@ jobs:
           cd ${{ secrets.PATH_TO_PROJECT }}
           cat << 'ENV_EOF' > .env
           APPNAME=${{ env.APPNAME }}
-          PORT=${{ env.API_PORT }}
+          API_PORT=${{ env.API_PORT }}
           LOCALE=${{ env.LOCALE }}
           NODE_ENV=${{ env.NODE_ENV }}
           PRODUCTION_URL=${{ env.PRODUCTION_URL }}
@@ -117,6 +117,5 @@ jobs:
               docker compose up -d --no-deps express-app
             fi
             
-            rm .env
             docker system prune -f -a
           EOF
