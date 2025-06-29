@@ -44,13 +44,10 @@ COPY --from=installer /var/www/apps/server/dist ./dist
 COPY --from=installer /var/www/apps/server/src/db/drizzle/migrations ./dist/db/drizzle/migrations
 COPY --from=installer /var/www/apps/server/src/db/drizzle/migrations/meta ./dist/db/drizzle/migrations/meta
 COPY --from=installer /var/www/package-lock.json .
-COPY apps/server/scripts/install-prod.sh ./scripts/install-prod.sh
 COPY apps/server/package.json ./
 
 RUN apk add --no-cache jq
-# RUN sh ./scripts/install-prod.sh temporary
 RUN npm install cookie-parser@^1.4.6 cors@^2.8.5 dotenv@^16.3.1 drizzle-orm@0.31.0 express@^4.21.2 morgan@^1.10.0 multer@^1.4.5-lts.1 pg@^8.12.0 postgres@^3.3.5 swagger-ui-express@^5.0.1 uuid@^10.0.0 winston@^3.10.0 zod@^3.22.2
-# RUN npm install $(cat package.json | jq -r '.dependencies | to_entries | .[] | "\(.key)@\(.value)"')
 RUN apk del jq
 
 ENV APPNAME="${APPNAME}" \
