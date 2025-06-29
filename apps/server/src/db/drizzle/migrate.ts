@@ -16,10 +16,7 @@ const db_migrate = async () => {
     throw error;
   }
 
-  const migrationsFolder =
-    config.app.isProduction && config.app.isLocale
-      ? path.join(__dirname, '../../../dist/db/drizzle/migrations')
-      : path.join(__dirname, '../../../src/db/drizzle/migrations');
+  const migrationsFolder = path.join(__dirname, 'migrations');
 
   await migrate(db, {
     migrationsFolder
