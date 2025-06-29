@@ -50,8 +50,8 @@ jobs:
           build-args: |
             APPNAME=${{ env.APPNAME }}
             API_PORT=${{ env.API_PORT }}
-            LOCALE=false
-            NODE_ENV=prod
+            LOCALE=${{ env.LOCALE }}
+            NODE_ENV=${{ env.NODE_ENV }}
             PRODUCTION_URL=${{ env.PRODUCTION_URL }}
             SECRET=${{ env.SECRET }}
             CLIENT_BASE_URL=${{ env.CLIENT_BASE_URL }}
@@ -82,10 +82,32 @@ jobs:
           ./apps/server/docker-compose.prod.yaml \
           ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PATH_TO_PROJECT }}/docker-compose.yml
 
+      - name: Create .env file and set enviroment variables
+        run: |
+          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
+          cd ${{ secrets.PATH_TO_PROJECT }}
+          cat << 'ENV_EOF' > .env
+          APPNAME=${{ env.APPNAME }}
+          API_PORT=${{ env.API_PORT }}
+          LOCALE=${{ env.LOCALE }}
+          NODE_ENV=${{ env.NODE_ENV }}
+          PRODUCTION_URL=${{ env.PRODUCTION_URL }}
+          SECRET=${{ env.SECRET }}
+          CLIENT_BASE_URL=${{ env.CLIENT_BASE_URL }}
+          DATABASE_HOST=${{ env.DATABASE_HOST }}
+          DATABASE_PORT=${{ env.DATABASE_PORT }}
+          DATABASE_USER=${{ env.DATABASE_USER }}
+          DATABASE_PASSWORD=${{ env.DATABASE_PASSWORD }}
+          DATABASE_URL=${{ env.DATABASE_URL }}
+          DATABASE_NAME=${{ env.DATABASE_NAME }}
+          DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ secrets.SERVER_REPOSITORY_NAME }}:latest
+          ENV_EOF
+
       - name: Deploy to production
         run: |
           ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
             cd ${{ secrets.PATH_TO_PROJECT }}
+            chmod 600 .env
             
             if [ ! "$(docker ps -q -f name=db)" ]; then
               echo "Initial deployment - starting all services"
@@ -96,5 +118,6 @@ jobs:
               docker-compose up -d --no-deps ${{ secrets.DOCKER_USERNAME }}/${{ secrets.SERVER_REPOSITORY_NAME }}
             fi
             
+            rm .env
             docker image prune -f
           EOF
