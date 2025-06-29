@@ -35,7 +35,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.CLIENT_REPOSITORY_NAME }}:latest
           build-args: |
-            BASE_API_URL=${{ secrets.PRODUCTION_URL }}
+            BASE_API_URL=${{ secrets.BASE_API_URL }}
 
   deploy:
     name: Deploy using Docker
@@ -52,7 +52,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          BASE_API_URL: ${{ secrets.PRODUCTION_URL }}
+          BASE_API_URL: ${{ secrets.BASE_API_URL }}
           CLIENT_REPOSITORY_NAME: ${{ secrets.CLIENT_REPOSITORY_NAME }}
           CLIENT_PORT: ${{ secrets.CLIENT_PORT }}
           CLIENT_CONTAINER_NAME: ${{ secrets.CLIENT_CONTAINER_NAME }}
