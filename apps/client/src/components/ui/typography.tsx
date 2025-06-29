@@ -38,7 +38,7 @@ const Typography = ({ className, variant, tag = "p", ...props }: ITypographyProp
   return (
     <Comp
       data-slot={variant ?? "xs"}
-      className={cn(typographyVariants({ variant }), className, "")}
+      className={cn(typographyVariants({ variant }), className)}
       {...props}
     />
   );

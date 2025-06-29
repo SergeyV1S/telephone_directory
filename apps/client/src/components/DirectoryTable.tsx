@@ -64,19 +64,19 @@ export const DirectoryTable = () => {
   const totalPages = totalRecords !== 0 ? Math.ceil(totalRecords! / currentLimit) : 1;
 
   useEffect(() => {
-    fetchRecords(currentLimit, currentPage, query, orderBy, groupBy);
+    fetchRecords();
   }, [currentLimit, currentPage, query, orderBy, groupBy]);
 
   return (
     <Table className='mt-5'>
       <TableCaption>
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-3 w-full'>
           <Typography variant='xs'>Записи</Typography>
           <Select
             defaultValue={currentLimit.toString()}
             onValueChange={(newLimit) => setValue("currentLimit", +newLimit)}
           >
-            <SelectTrigger className='w-24' disabled={isLoading}>
+            <SelectTrigger className='w-full max-w-24 shrink' disabled={isLoading}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -117,7 +117,7 @@ export const DirectoryTable = () => {
           <SearchInput
             value={inputValue}
             onChange={handleChange}
-            placeholder='Введите текст'
+            placeholder='Поиск'
             className='max-w-96'
           />
         </div>
@@ -144,8 +144,8 @@ export const DirectoryTable = () => {
           ) : (
             records.map((record) => (
               <TableRow key={record.id}>
-                <TableCell className={`${record.id.length >= 6 && "pl-0"} `}>{record.id}</TableCell>
-                <TableCell>{`${record.firstname} ${record.lastname} ${record.middlename}`}</TableCell>
+                <TableCell>{record.id}</TableCell>
+                <TableCell>{`${record.lastname} ${record.firstname} ${record.middlename}`}</TableCell>
                 <TableCell className='flex flex-col'>
                   <span>Газ. тел.: {record.gasPhone}</span>
                   <span>Гор. тел.: {record.urbanPhone}</span>

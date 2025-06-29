@@ -90,7 +90,7 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
-  --base-dark-3: oklch(16.13% 0.042 264.695 / 3%);
+  --base-dark-3: #f8f9f9;
   --base-dark-8: oklch(16.13% 0.042 264.695 / 8%);
   --base-dark-5: oklch(16.13% 0.042 264.695 / 5%);
   --base-dark: oklch(16.13% 0.042 264.695);

@@ -1,9 +1,8 @@
-import { AxiosError } from "axios";
-
 import { toast } from "sonner";
 import { create } from "zustand";
 
 import { postUploadPhonebookRecords } from "@/api";
+import { handleError } from "@/helpers";
 
 import type { TUploadStore } from "./types";
 
@@ -32,12 +31,8 @@ export const useUploadStore = create<TUploadStore>((set, get) => ({
       ).data;
       toast.success("Данные успешно обновлены");
       set({ responseSuccess: message.success, isModalOpen: false });
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        toast.error("Произошла ошибка", {
-          description: e.response?.data.message
-        });
-      }
+    } catch (error) {
+      handleError(error);
     } finally {
       set({ isLoading: false });
     }
