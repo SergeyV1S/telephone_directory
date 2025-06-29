@@ -14,7 +14,9 @@ export const Header = () => {
         <img src='/logo.svg' alt='Gazprom_logo' />
         <Dialog open={isModalOpen} onOpenChange={onOpenDialogChange}>
           <DialogTrigger asChild>
-            <Button variant='outline'>Обновить данные</Button>
+            <Button variant='outline' size='lg'>
+              Обновить данные
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

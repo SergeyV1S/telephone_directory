@@ -6,7 +6,7 @@ import { cn } from "@/helpers/utils";
 import { typographyVariants } from "./typography";
 
 const buttonVariants = cva(
-  "inline-flex items-center cursor-pointer disabled:cursor disabled:cursor-not-allowed justify-center gap-2 whitespace-nowrap rounded-md transition-all disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center cursor-pointer disabled:cursor disabled:cursor-not-allowed justify-center whitespace-nowrap rounded-md transition-all disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -16,13 +16,14 @@ const buttonVariants = cva(
         outline:
           "border bg-background shadow-xs hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary: "bg-bright-blue-light text-white shadow-xs hover:bg-bright-blue-light/80",
-        ghost: "hover:bg-accent dark:hover:bg-accent/50"
+        ghost: "hover:bg-border dark:hover:bg-accent/50"
       },
       size: {
-        default: "h-10 px-4 py-2 has-[>svg]:px-3",
+        default: "h-10 py-2",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-11 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-10"
+        icon: "size-10",
+        icon_xs: "size-8"
       }
     },
     defaultVariants: {
@@ -51,7 +52,8 @@ const Button = ({
       data-slot='button'
       className={cn(
         typographyVariants({ variant: typographyVariant?.variant }),
-        buttonVariants({ variant, size, className })
+        buttonVariants({ variant, size, className }),
+        ""
       )}
       {...props}
     />

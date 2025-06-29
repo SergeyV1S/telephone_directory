@@ -7,13 +7,13 @@ import { cn } from "@/helpers/utils";
 import { useDebouncedInput } from "@/hooks";
 import { useDirectoryStore } from "@/store";
 
-import { Button, Input, Typography } from ".";
+import { Button, Input, Typography, typographyVariants } from ".";
 
 const Table = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     data-slot='table-container'
     className={cn(
-      "relative flex flex-col size-full space-y-5 bg-white rounded-sm p-4 shadow-table",
+      "relative flex flex-col size-full space-y-5 bg-white min-h-[calc(100vh-120px)] rounded-sm p-4 shadow-table",
       className
     )}
     {...props}
@@ -37,7 +37,7 @@ const TableContent = ({ className, ...props }: React.ComponentProps<"div">) => (
 );
 
 const TableBody = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div data-slot='table-body' className={cn("w-full", className)} {...props}>
+  <div data-slot='table-body' className={cn("w-full ", className)} {...props}>
     <div className=''>{props.children}</div>
   </div>
 );
@@ -54,7 +54,7 @@ const TableRow = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     data-slot='table-row'
     className={cn(
-      "w-full grid grid-cols-[60px_repeat(7,minmax(140px,1fr))] transition-colors",
+      "bg-white z-10 w-full grid grid-cols-[60px_repeat(7,minmax(140px,1fr))] transition-colors",
       className
     )}
     {...props}
@@ -64,18 +64,22 @@ const TableRow = ({ className, ...props }: React.ComponentProps<"div">) => (
 const TableHead = ({
   className,
   asChild,
+  isActive,
   ...props
 }: React.HTMLAttributes<HTMLElement> & {
   asChild?: boolean;
+  isActive?: boolean;
 }) => {
-  const Comp = asChild ? Slot : Typography;
+  const Comp = asChild ? Slot : Button;
 
   return (
     <Comp
       data-slot='table-head'
-      {...(!asChild && { tag: "h2", variant: "s_medium" })}
+      {...(!asChild && { variant: "ghost" })}
       className={cn(
-        "bg-base-dark-3 border-b flex items-center h-10 px-2 py-6 last:pl-8",
+        "bg-base-dark-3 border-b rounded-none hover:rounded-lg transition-rounded duration-300 flex items-center justify-start gap-1 h-10 py-6 px-2 last:pl-8",
+        typographyVariants({ variant: "s_medium" }),
+        isActive && "text-corporate",
         className
       )}
       {...props}
@@ -95,7 +99,7 @@ const TableCell = ({
   return (
     <Comp
       data-slot='table-cell'
-      className={cn("px-2 py-3 align-middle border-b last:pl-8", className)}
+      className={cn("px-2 py-3 align-middle border-b last:pl-8 first:wrap-normal", className)}
       {...props}
     />
   );

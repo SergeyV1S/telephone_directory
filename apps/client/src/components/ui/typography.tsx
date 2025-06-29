@@ -12,7 +12,7 @@ export interface ITypographyProps
 }
 
 const typographyVariants = cva(
-  "align-middle tracking-normal text-base-dark selection:text-corporate selection:bg-base-dark-8",
+  "align-middle wrap-break-word tracking-normal text-base-dark selection:text-corporate selection:bg-base-dark-8",
   {
     variants: {
       variant: {
@@ -20,6 +20,7 @@ const typographyVariants = cva(
         L_medium: "font-medium text-2xl 3xl:text-4xl leading-[130%]",
         m_medium: "font-medium text-xl 3xl:text-3xl leading-[130%]",
         s_medium: "font-medium text-lg 3xl:text-2xl leading-[130%]",
+        xxs_medium: "font-medium text-sm 3xl:text-base leading-[110%]",
         xs: "font-normal text-base 3xl:text-xl leading-[150%]",
         s: "font-normal text-lg 3xl:text-2xl leading-[150%]",
         xxs: "font-normal text-sm 3xl:text-base leading-[110%]"
@@ -37,7 +38,7 @@ const Typography = ({ className, variant, tag = "p", ...props }: ITypographyProp
   return (
     <Comp
       data-slot={variant ?? "xs"}
-      className={cn(typographyVariants({ variant }), className)}
+      className={cn(typographyVariants({ variant }), className, "")}
       {...props}
     />
   );

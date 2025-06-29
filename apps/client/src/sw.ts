@@ -21,7 +21,7 @@ const imageRoute = new Route(
 registerRoute(imageRoute);
 
 const apiRoute = new Route(
-  ({ request }) => request.url.startsWith("https://jsonplaceholder.typicode.com/photos"),
+  ({ request }) => request.url.startsWith(process.env.BASE_API_URL || "http://localhost:8000"),
   new NetworkFirst({
     cacheName: "api-get-employers"
   })

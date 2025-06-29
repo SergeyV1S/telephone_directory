@@ -7,3 +7,4 @@ export * from "./searchInput";
 export * from "./sonner";
 export * from "./dialog";
 export * from "./dropdown-menu";
+export * from "./hover-card";
